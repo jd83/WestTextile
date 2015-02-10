@@ -364,7 +364,7 @@ a.play-icon span {
 	padding: 0 0 30px;
 }
 .footer{
-	background: url(../) no-repeat ;
+	background: url(../images/banner.jpg) no-repeat ;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
