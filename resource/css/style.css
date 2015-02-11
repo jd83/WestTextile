@@ -364,12 +364,6 @@ a.play-icon span {
 	padding: 0 0 30px;
 }
 .footer{
-	background: url(../) no-repeat ;
-	background-size: cover;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	-ms-background-size: cover;
 	min-height: 20px;
 	padding:10em 0 2em;
 }
@@ -1186,7 +1180,6 @@ div.register-bottom-grid {
 	padding: 1.3em 0;
 }
 .footer {
-background: url(../images/foot.png) no-repeat -32px 0px;
 min-height: 440px;
 padding: 10em 0 2em;
 }
@@ -1278,7 +1271,6 @@ a.play-icon span {
 	font-size: 1em;
 }
 .footer {
-	background: url(../images/foot.png) no-repeat -98px 0px;
 	min-height: 380px;
 	padding: 7em 0 1em;
 }

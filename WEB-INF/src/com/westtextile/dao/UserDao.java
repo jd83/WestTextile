@@ -4,5 +4,5 @@ import com.westtextile.persistence.mybatis.model.User;
 import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
 public interface UserDao {	
 	UserWithBLOBs getUserByUserId(int userId);
-	void insertUser(User user);
+	void insertUser(UserWithBLOBs user);
 }

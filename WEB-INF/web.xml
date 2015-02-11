@@ -35,5 +35,4 @@
         <description>Don't assign users to this role</description>
         <role-name>no-users</role-name>
     </security-role>
-
 </web-app>

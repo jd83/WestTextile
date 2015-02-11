@@ -19,7 +19,7 @@
  * under the License.
  */
 
-package example;
+package action;
 
 import java.util.Arrays;
 import java.util.List;

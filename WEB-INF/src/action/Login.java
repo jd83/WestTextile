@@ -19,7 +19,7 @@
  * under the License.
  */
 
-package example;
+package action;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 

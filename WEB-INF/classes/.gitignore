@@ -1,0 +1,9 @@
+/action/
+/com/
+/configuration.xml
+/example.xml
+/generatorConfig.xml
+/jdbc.properties
+/persistence/
+/struts-config.xml
+/struts.xml

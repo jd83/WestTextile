@@ -20,16 +20,13 @@
             <exception-mapping exception="java.lang.Exception" result="error"/>
         </global-exception-mappings>
 
-        <action name="index">
+        <action name="index">       	
             <result type="redirectAction">
-                <param name="actionName">HelloWorld</param>
-                <param name="namespace">/example</param>
+                <param name="actionName">Home</param>
             </result>
         </action>
     </package>
 
-    <include file="example.xml"/>
-
-    <!-- Add packages here -->
+    <include file="struts-config.xml"/>
 
 </struts>
