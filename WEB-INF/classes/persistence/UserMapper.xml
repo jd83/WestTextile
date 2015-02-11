@@ -1,0 +1,6 @@
+  <?xml version="1.0" encoding="UTF-8" ?> 
+  <!DOCTYPE mapper (View Source for full doctype...)> 
+- <mapper namespace="persistence.UserMapper">
+  <cache />  
+  <select id="getUserByName" parameterType="string" resultType="User">select user_id,user_name,phone_number from user where user_name= #{userName}</select> 
+  </mapper>

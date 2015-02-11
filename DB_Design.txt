@@ -1,4 +1,4 @@
-CREATE DATABASE west_textile;
+#CREATE DATABASE west_textile;
 
 CREATE TABLE user
 (
