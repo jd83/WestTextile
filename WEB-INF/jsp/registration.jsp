@@ -36,6 +36,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			if (chkShopInfo.checked)
 			{
 				document.getElementById(disDiv).setAttribute("style","display: block;");
+				if((obj.id).indexOf("ShopInfo")>-1){
+					document.getElementById("divShopInfo").setAttribute("style","display: block;");
+				}				
 			}else{
 				document.getElementById(disDiv).setAttribute("style","display: none;");
 			}
@@ -43,17 +46,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		function addShopInfo(){
 			var divShopInfo=document.getElementById("divShopInfo").cloneNode(true);
-			divShopInfo.setAttribute("style","display: block;");
 			var top=document.getElementById("divShopInfoAuto");
 			var divShopInfoCnt=top.childNodes.length;
-			divShopInfo.id="divShopInfo"+(divShopInfoCnt-1);
+			divShopInfo.id="divShopInfo-"+(divShopInfoCnt-2);
 			top.appendChild(divShopInfo);
 		}
 
-		function removeShopInfo(){
+		function removeShopInfo(obj){
 			var top=document.getElementById("divShopInfoAuto");
-			var divShopInfoCnt=top.childNodes.length;
-			top.removeChild(0);
+			if(obj.id!="divShopInfo"){
+				top.removeChild(obj);
+			}			
 		}
 	</script>
 </head>
@@ -84,7 +87,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span class="menu"> </span>
 							<ul>
 								<li><a href="HelloWorld.action">主页</li>
-								<li><a href="about.html">XX查询</a></li>
+								<li><a href="about.html">商铺查询</a></li>
+								<li><a href="about.html">费用管理</a></li>
 								<li><a href="news.html">资料馆</a></li>
 								<li><a href="news.html">问题建议</a></li>
 								<li><a href="events.html">联系我们</a></li>
@@ -132,31 +136,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 					 <div class="clearfix"> </div>
 					   <a class="news-letter" href="#">
-						 <label class="checkbox"><input type="checkbox" id="chkShopInfo" onclick="showChkInfo(this,'divShopInfoAuto');"><i> </i>验证XX信息</label>
+						 <label class="checkbox"><input type="checkbox" id="chkShopInfo" onclick="showChkInfo(this,'divShopInfoAuto');"><i> </i>验证商铺信息（验证该信息后，才能使用查询管理功能）</label>
 					   </a>
 				</div>
-				 <div class="register-bottom-grid" id="divShopInfoAuto" style="display: none">
-					<span>增加商铺<input type="button" value="+" onclick="addShopInfo();"/></span>
-					<span>删除商铺<input type="button" value="-" onclick="removeShopInfo();"/></span>
-				 </div>
-				 <div class="register-bottom-grid" id="divShopInfo" style="display: none">
-						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
-							<span>商铺号<label>*</label></span>
-							<input type="text" name="shop_name"  value="格式：x-x-x" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
-						 </div>
-						 <div class="wow fadeInRight" data-wow-delay="0.4s">
-							<span>商铺类型<label>*</label></span>
-							<input type="text" value="经营权或产权" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '经营权或产权';}">
-						 </div>
-						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
-							<span>商铺面积<label>*</label></span>
-							<input type="text" name="username"> 
-						 </div>
-						 <div class="wow fadeInRight" data-wow-delay="0.4s">
-							<span>商铺总价<label>*</label></span>
-							<input type="text">
-						 </div>
-				 </div>
+				 <div class="register-bottom-grid" id="divShopInfoAuto" style="display: none">	
+				
+					 <div class="register-bottom-grid" id="divShopInfo" style="display: none">
+						 <span>增加商铺<input type="button" value="+" onclick="addShopInfo();"/>&nbsp&nbsp删除商铺<input type="button" value="-" onclick="removeShopInfo(this.parentNode.parentNode);"/></span>
+							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
+								<span>商铺号<label>*</label></span>
+								<input type="text" name="shop_name"  value="格式：x-x-x。如1-1-1" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
+							 </div>
+							 <div class="wow fadeInRight" data-wow-delay="0.4s">
+								<span>商铺类型<label>*</label></span>
+								<div>
+									<table>
+										<tr>
+											<td>经营权<input type="radio" name="shoptype" value="经营权"/>&nbsp&nbsp&nbsp&nbsp</td>
+											<td>产权<input type="radio" name="shoptype" value="产权"/></td>
+										</tr>
+									</table>							
+								</div>
+							 </div>
+							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
+								<span>商铺面积<label>*</label></span>
+								<input type="text" name="username"> 
+							 </div>
+							 <div class="wow fadeInRight" data-wow-delay="0.4s">
+								<span>商铺总价<label>*</label></span>
+								<input type="text">
+							 </div>
+					 </div>
+				  </div>
 				 <div class="register-top-grid">
 					 <div class="clearfix"> </div>
 					   <a class="news-letter" href="#">
@@ -165,19 +176,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				 <div class="register-bottom-grid" id="divAdditionInfo" style="display: none">
 						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
-							<span>手机/邮箱<label>*</label></span>
+							<span>身份证号码</span>
 							<input type="text" name="username"> 
 						 </div>
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
-							<span>Confirm Password<label>*</label></span>
+							<span>QQ号码</span>
 							<input type="text">
 						 </div>
+						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
+							<span>职业</span>
+							<input type="text" name="username"> 
+						 </div>
+						 <div class="wow fadeInRight" data-wow-delay="0.4s">
+							<span>年龄</span>
+							<input type="text">
+						 </div>						 
 				 </div>
 			</form>
 				<div class="clearfix"> </div>
 				<div class="register-but">
 				   <form>
-					   <input type="submit" value="submit">
+					   <input type="submit" value="注册">
 					   <div class="clearfix"> </div>
 				   </form>
 				</div>
