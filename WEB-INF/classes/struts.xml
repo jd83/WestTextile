@@ -23,6 +23,7 @@
         <action name="index">       	
             <result type="redirectAction">
                 <param name="actionName">Home</param>
+                <param name="namespace">/wt</param>
             </result>
         </action>
     </package>

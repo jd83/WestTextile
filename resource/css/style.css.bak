@@ -18,6 +18,17 @@ body a{
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
 }
+
+table caption{
+	color: #fbb034;
+	text-decoration: none;
+	font-size: 1.4em;
+	font-weight: 400;
+}
+
+table td{
+	color: #fbb034;
+}
 .header{
 	background:#fff;
 	padding:1em 0em;
@@ -364,12 +375,6 @@ a.play-icon span {
 	padding: 0 0 30px;
 }
 .footer{
-	background: url(../images/banner.jpg) no-repeat ;
-	background-size: cover;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	-ms-background-size: cover;
 	min-height: 20px;
 	padding:10em 0 2em;
 }
@@ -1066,6 +1071,7 @@ div#portfoliolist {
 	padding-bottom: 15px;
 	margin: 0;
 	font-weight: 600;
+	font-family:Î¢ÈíÑÅºÚ
 }
 .register-top-grid div, .register-bottom-grid div {
 	width: 48%;
@@ -1073,11 +1079,12 @@ div#portfoliolist {
 	margin: 10px 0;
 }
 .register-top-grid span, .register-bottom-grid span {
-	color:#999;
+	color:#555;
 	font-size: 0.85em;
 	padding-bottom: 0.2em;
 	display: block;
 	text-transform: uppercase;
+	font-family:Î¢ÈíÑÅºÚ
 }
 .register-top-grid input[type="text"], .register-bottom-grid input[type="text"] {
 	border: 1px solid #EEE;
@@ -1092,18 +1099,20 @@ div#portfoliolist {
 	font-size: 1.1em;
 	line-height: 27px;
 	cursor: pointer;
+	font-family:Î¢ÈíÑÅºÚ
 }
 .checkbox {
 	float: left;
 	position: relative;
 	font-size: 0.85em;
 	color:#555;
+	clear: both;
 }
 .checkbox:last-child {
 	margin-bottom: 0;
 }
 .news-letter {
-	color: #555;
+	color: #fff;
 	font-weight:600;
 	font-size: 0.85em;
 	margin-bottom: 1em;
@@ -1115,7 +1124,7 @@ div#portfoliolist {
 	-o-transition: 0.5s all;
 	clear: both;
 }
-.checkbox i {
+.checkbox input + i {
 	position: absolute;
 	bottom: 5px;
 	left: 0;
@@ -1127,7 +1136,7 @@ div#portfoliolist {
 }
 .checkbox input + i:after {
 	content: '';
-	background: url("../resource/images/tick1.png") no-repeat 1px 2px;
+	background: url("../images/tick1.png") no-repeat 1px 2px;
 	top: -1px;
 	left: -1px;
 	width: 15px;
@@ -1144,10 +1153,12 @@ div#portfoliolist {
 	-moz-transition: opacity 0.1s;
 	-webkit-transition: opacity 0.1s;
 }
+
 .checkbox input {
 	position: absolute;
 	left: -9999px;
 }
+
 .checkbox input:checked + i:after {
 	opacity: 1;
 }
@@ -1177,6 +1188,17 @@ div#portfoliolist {
 div.register-bottom-grid {
 	margin-top:3em;
 }
+
+.shopinfo {
+	padding: 5em 0 5em;
+	color:#555;
+	font-size: 0.85em;
+	padding-bottom: 0.2em;
+	display: block;
+	text-transform: uppercase;
+	font-family:Î¢ÈíÑÅºÚ
+}
+
 /*--responsive design--*/
 @media (max-width:1280px){	
 .banner-info {
@@ -1186,7 +1208,6 @@ div.register-bottom-grid {
 	padding: 1.3em 0;
 }
 .footer {
-background: url(../images/foot.png) no-repeat -32px 0px;
 min-height: 440px;
 padding: 10em 0 2em;
 }
@@ -1278,7 +1299,6 @@ a.play-icon span {
 	font-size: 1em;
 }
 .footer {
-	background: url(../images/foot.png) no-repeat -98px 0px;
 	min-height: 380px;
 	padding: 7em 0 1em;
 }

@@ -53,7 +53,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		function removeShopInfo(){
 			var top=document.getElementById("divShopInfoAuto");
 			var divShopInfoCnt=top.childNodes.length;
-			top.removeChild(0);
+			top.removeChild(divShopInfoCnt-1);
 		}
 	</script>
 </head>
