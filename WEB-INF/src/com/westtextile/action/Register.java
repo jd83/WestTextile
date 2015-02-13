@@ -23,7 +23,10 @@ package com.westtextile.action;
 
 
 
+import javax.servlet.http.HttpSession;
+
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 
 /**
  * <code>Set welcome message.</code>
@@ -34,38 +37,50 @@ public class Register extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 5116793257658151173L;
+	private String username;
+    private String password;
+    private String displayname;
 
     public String execute() throws Exception {
-        setMessage(getText(MESSAGE));
+
         return SUCCESS;
     }
+    
+	public String registerUser() throws Exception {
+		if (!"admin".equals(username)) {
+			HttpSession session = ServletActionContext.getRequest()
+					.getSession();
+			session.setAttribute("username", username);
+			return SUCCESS;
+		} else {
+			return INPUT;
+		}
 
-    /**
-     * Provide default valuie for Message property.
-     */
-    public static final String MESSAGE = "HelloWorld.message";
+	}
 
-    /**
-     * Field for Message property.
-     */
-    private String message;
 
-    /**
-     * Return Message property.
-     *
-     * @return Message property
-     */
-    public String getMessage() {
-        return message;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    /**
-     * Set Message property.
-     *
-     * @param message Text to display on HelloWorld page.
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getDisplayname() {
+		return displayname;
+	}
+
+	public void setDisplayname(String displayname) {
+		this.displayname = displayname;
+	}
 
 }

@@ -108,7 +108,7 @@ table td{
 	width: 79.33%;
 }
 .search2 input[type="submit"] {
-	background: url('../resource/images/sprit-1.png') no-repeat 5px 2px;
+	background: url('../images/sprit-1.png') no-repeat 5px 2px;
 	padding: 12.3px 22px;
 	border: none;
 	cursor: pointer;
@@ -1106,7 +1106,6 @@ div#portfoliolist {
 	position: relative;
 	font-size: 0.85em;
 	color:#555;
-	clear: both;
 }
 .checkbox:last-child {
 	margin-bottom: 0;
@@ -1168,7 +1167,7 @@ div#portfoliolist {
 .register-but{
 	margin-top:1em;
 }
-.register-but form input[type="submit"] {
+.register-but input[type="submit"] {
 	background: #fbb034;
 	color: #FFF;
 	font-size: 1.2em;
@@ -1189,16 +1188,50 @@ div.register-bottom-grid {
 	margin-top:3em;
 }
 
-.shopinfo {
-	padding: 5em 0 5em;
-	color:#555;
-	font-size: 0.85em;
-	padding-bottom: 0.2em;
+.h_nav ul li{
 	display: block;
-	text-transform: uppercase;
-	font-family:Î¢ÈíÑÅºÚ
+}
+.h_nav ul li a{
+	display: block;
+	font-size: 0.9em;
+	color: #555;
+	padding: 13px 0px;
+	text-transform: capitalize;
+	line-height: 1.8em;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	line-height: 1em;
+}
+.h_nav ul li a:hover{
+	color:#ed1c24;
+	text-decoration:underline;
 }
 
+.row {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+.col{
+	display: block;
+}
+.grid_1{
+	text-align:center;
+	margin-bottom: 2em;
+}
+.grid_1 h1{
+	font-size:2em;
+	color:#000;
+	text-transform:uppercase;
+	font-weight:bold;
+	margin-bottom:1em;
+}
+.grid_1 p{
+	font-size:0.8125em;
+	color:#999;
+	line-height:1.8em;
+}
 /*--responsive design--*/
 @media (max-width:1280px){	
 .banner-info {
@@ -1540,7 +1573,7 @@ a.go {
 .register-top-grid span, .register-bottom-grid span {
 	font-size: 0.8125em;
 }
-.register-but form input[type="submit"] {
+.register-but input[type="submit"] {
 	font-size: 1em;
 	padding: 0.5em 1.5em;
 }
@@ -1814,7 +1847,7 @@ a.go {
 .login-page {
 	padding: 2em 0;
 }
-.register-but form input[type="submit"] {
+.register-but input[type="submit"] {
 	font-size: 0.9em;
 	padding: 0.5em 1.5em;
 }

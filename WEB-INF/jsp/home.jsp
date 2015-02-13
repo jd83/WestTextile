@@ -44,8 +44,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="header-left" style="font-size:12px;font-family:Î¢ÈíÑÅºÚ">
 					<ul>
-						<li><a href="Register">×¢²á</a></li>
-						<li class="active"><a href="login.html">µÇÂ¼</a></li>
+						<s:if test="''==''">
+							<li><a href="Register_Forward">×¢²á</a></li>
+							<li class="active"><a href="login.html">µÇÂ¼</a></li>
+						</s:if>
+						<s:else>
+							<li class="active"><a href="login.html">ÓÃ»§Ãû</a></li>
+							<li><a href="#">ÍË³ö</a></li>
+						</s:else>
 					</ul>
 				</div>
 				<div class="clearfix"> </div>

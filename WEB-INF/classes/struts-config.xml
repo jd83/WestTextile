@@ -10,8 +10,12 @@
             <result>/WEB-INF/jsp/home.jsp</result>
         </action>
         <!-- Add actions here -->
-        <action name="Register" class="com.westtextile.action.Register">
+        <action name="Register_Forward" class="com.westtextile.action.Register">
             <result>/WEB-INF/jsp/registration.jsp</result>
+        </action>            
+        <action name="Register" method="registerUser" class="com.westtextile.action.Register">
+ 
+            <result>/WEB-INF/jsp/home.jsp</result>
         </action>        
     </package>
 </struts>

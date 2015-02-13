@@ -72,7 +72,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="header-left" style="font-size:12px;font-family:微软雅黑">
 					<ul>
-						<li><a href="Register">注册</a></li>
+						<li><a href="Register_Forward">注册</a></li>
 						<li class="active"><a href="login.html">登录</a></li>
 					</ul>
 				</div>
@@ -114,12 +114,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="main-1" style="background-color:#7CCD7C">
 		<div class="container">
 			<div class="register">
-		  	  <form> 
+		  	  <form action="Register" method="POST"> 
 				 <div class="register-top-grid">
 					<h3>个人信息</h3>
 					 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 						<span>手机/邮箱<label>*</label></span>
-						<input type="text" name="username"> 
+						<input type="text" name="username" value="a"/> 
 					 </div>
 					 <div class="wow fadeInRight" data-wow-delay="0.4s">
 						<span>QQ名<label>*</label></span>
@@ -145,7 +145,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						 <span>增加商铺<input type="button" value="+" onclick="addShopInfo();"/>&nbsp&nbsp删除商铺<input type="button" value="-" onclick="removeShopInfo(this.parentNode.parentNode);"/></span>
 							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 								<span>商铺号<label>*</label></span>
-								<input type="text" name="shop_name"  value="格式：x-x-x。如1-1-1" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
+								<input type="text" name="shopname"  value="格式：x-x-x。如1-1-1" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
 							 </div>
 							 <div class="wow fadeInRight" data-wow-delay="0.4s">
 								<span>商铺类型<label>*</label></span>
@@ -160,11 +160,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							 </div>
 							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 								<span>商铺面积<label>*</label></span>
-								<input type="text" name="username"> 
+								<input type="text" name="shopsquare"> 
 							 </div>
 							 <div class="wow fadeInRight" data-wow-delay="0.4s">
 								<span>商铺总价<label>*</label></span>
-								<input type="text">
+								<input type="text" name="shopamount">
 							 </div>
 					 </div>
 				  </div>
@@ -177,29 +177,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				 <div class="register-bottom-grid" id="divAdditionInfo" style="display: none">
 						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 							<span>身份证号码</span>
-							<input type="text" name="username"> 
+							<input type="text" name="identityid"> 
 						 </div>
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
 							<span>QQ号码</span>
-							<input type="text">
+							<input type="text"  name="qqnumber">
 						 </div>
 						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 							<span>职业</span>
-							<input type="text" name="username"> 
+							<input type="text" name="career"> 
 						 </div>
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
 							<span>年龄</span>
-							<input type="text">
+							<input type="text" name="age">
 						 </div>						 
 				 </div>
-			</form>
+
 				<div class="clearfix"> </div>
 				<div class="register-but">
-				   <form>
-					   <input type="submit" value="注册">
-					   <div class="clearfix"> </div>
-				   </form>
+				   <input type="submit" value="注册">
+				   <div class="clearfix"> </div>
 				</div>
+			</form>
 		   </div>
 		 </div>
 	</div>
