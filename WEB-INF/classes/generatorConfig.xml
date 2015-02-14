@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration >
-<properties resource="com/westtextile/jdbc.properties"/>
+<properties resource="jdbc.properties"/>
   <context id="context1" >
-    <jdbcConnection driverClass="${driver}" connectionURL="jdbc:mysql://localhost:3306/west_textile" userId="root" password="root" />
+    <jdbcConnection driverClass="${driver}" connectionURL="${url}" userId="${username}" password="${password}" />
     <javaModelGenerator targetPackage="com.westtextile.persistence.mybatis.model" targetProject="WestTextile" />
-    <sqlMapGenerator targetPackage="com.westtextile.persistence.mybatis.mapper" targetProject="WestTextile" />
-    <javaClientGenerator targetPackage="com.westtextile.persistence.mybatis.client" targetProject="WestTextile" type="XMLMAPPER" />
-    <table schema="westtextile" tableName="user" domainObjectName="User"    enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"    enableSelectByExample="false" selectByExampleQueryId="false">
+    <sqlMapGenerator targetPackage="com.westtextile.persistence.mybatis.mapper" targetProject="${targetProject}" />
+    <javaClientGenerator targetPackage="com.westtextile.persistence.mybatis.client" targetProject="${targetProject}" type="XMLMAPPER" />
+    <table schema="${schema}" tableName="user" domainObjectName="User"    enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"    enableSelectByExample="false" selectByExampleQueryId="false">
     	<property name="useActualColumnNames" value="true"/> 
     </table>
-    <table schema="westtextile" tableName="shops" domainObjectName="Shops"    enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"    enableSelectByExample="false" selectByExampleQueryId="false">
+    <table schema="${schema}" tableName="shops" domainObjectName="Shops"    enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"    enableSelectByExample="false" selectByExampleQueryId="false">
         <property name="useActualColumnNames" value="true"/> 
     </table>
   </context>

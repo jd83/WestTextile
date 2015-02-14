@@ -27,6 +27,8 @@ import javax.servlet.http.HttpSession;
 
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
+import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
+import com.westtextile.dao.impl.UserDaoImpl;
 
 /**
  * <code>Set welcome message.</code>
@@ -37,9 +39,20 @@ public class Register extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 5116793257658151173L;
-	private String username;
-    private String password;
-    private String displayname;
+	private UserWithBLOBs userWithBLOBs;
+//	private String username;
+//    private String password;
+//    private String repassword;
+//    private String displayname;
+//    private String identityid;
+//    private String qqnumber;
+//    private String career;
+//    private String age;
+    
+    private String shopname;
+    private String shoptype;
+    private String shopsquare;
+    private String shopamount;
 
     public String execute() throws Exception {
 
@@ -47,40 +60,124 @@ public class Register extends ActionSupport {
     }
     
 	public String registerUser() throws Exception {
-		if (!"admin".equals(username)) {
-			HttpSession session = ServletActionContext.getRequest()
-					.getSession();
-			session.setAttribute("username", username);
+		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312"); 
+		userWithBLOBs.setUserid(1);
+		userWithBLOBs.setUsername(username);
+		UserDaoImpl daoImpl =new UserDaoImpl();
+		
+		try {
+			daoImpl.insertUser(userWithBLOBs);
 			return SUCCESS;
-		} else {
+		} catch (Exception e) {
+			e.printStackTrace();
 			return INPUT;
 		}
-
+		
 	}
 
 
-	public String getPassword() {
-		return password;
+//	public String getPassword() {
+//		return password;
+//	}
+//
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
+//
+//	public String getUsername() {
+//		return username;
+//	}
+//
+//	public void setUsername(String username) {
+//		this.username = username;
+//	}
+//
+//	public String getDisplayname() {
+//		return displayname;
+//	}
+//
+//	public void setDisplayname(String displayname) {
+//		this.displayname = displayname;
+//	}
+//
+//	public String getRepassword() {
+//		return repassword;
+//	}
+//
+//	public void setRepassword(String repassword) {
+//		this.repassword = repassword;
+//	}
+//
+//	public String getIdentityid() {
+//		return identityid;
+//	}
+//
+//	public void setIdentityid(String identityid) {
+//		this.identityid = identityid;
+//	}
+//
+//	public String getQqnumber() {
+//		return qqnumber;
+//	}
+//
+//	public void setQqnumber(String qqnumber) {
+//		this.qqnumber = qqnumber;
+//	}
+//
+//	public String getCareer() {
+//		return career;
+//	}
+//
+//	public void setCareer(String career) {
+//		this.career = career;
+//	}
+//
+//	public String getAge() {
+//		return age;
+//	}
+//
+//	public void setAge(String age) {
+//		this.age = age;
+//	}
+
+	public String getShopname() {
+		return shopname;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setShopname(String shopname) {
+		this.shopname = shopname;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getShoptype() {
+		return shoptype;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setShoptype(String shoptype) {
+		this.shoptype = shoptype;
 	}
 
-	public String getDisplayname() {
-		return displayname;
+	public String getShopsquare() {
+		return shopsquare;
 	}
 
-	public void setDisplayname(String displayname) {
-		this.displayname = displayname;
+	public void setShopsquare(String shopsquare) {
+		this.shopsquare = shopsquare;
+	}
+
+	public String getShopamount() {
+		return shopamount;
+	}
+
+	public void setShopamount(String shopamount) {
+		this.shopamount = shopamount;
+	}
+
+	public UserWithBLOBs getUserWithBLOBs() {
+		return userWithBLOBs;
+	}
+
+	public void setUserWithBLOBs(UserWithBLOBs userWithBLOBs) {
+		this.userWithBLOBs = userWithBLOBs;
 	}
 
 }

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=gb2312" %>
+<%@ page pageEncoding="gb2312" contentType="text/html;charset=gb2312"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -7,7 +7,7 @@
 <link href="../resource/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <link href="../resource/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <meta name="keywords" content="Hiking Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -114,24 +114,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="main-1" style="background-color:#7CCD7C">
 		<div class="container">
 			<div class="register">
-		  	  <form action="Register" method="POST"> 
+		  	  <form action="Register"> 
 				 <div class="register-top-grid">
 					<h3>个人信息</h3>
 					 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 						<span>手机/邮箱<label>*</label></span>
-						<input type="text" name="username" value="a"/> 
+						<input type="text" name="userWithBLOBs.username"/> 
 					 </div>
 					 <div class="wow fadeInRight" data-wow-delay="0.4s">
 						<span>QQ名<label>*</label></span>
-						<input type="text"  name="displayname"> 
+						<input type="text"  name="userWithBLOBs.displayname"> 
 					 </div>
 					 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 						<span>密码<label>*</label></span>
-						<input type="text" name="password">
+						<input type="text" name="userWithBLOBs.password">
 					 </div>
 					 <div class="wow fadeInRight" data-wow-delay="0.4s">
 						<span>确认密码<label>*</label></span>
-						<input type="text" name="repassword">
+						<input type="text">
 					 </div>
 
 					 <div class="clearfix"> </div>
@@ -152,7 +152,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div>
 									<table>
 										<tr>
-											<td>经营权<input type="radio" name="shoptype" value="经营权"/>&nbsp&nbsp&nbsp&nbsp</td>
+											<td>经营权<input type="radio" name="shoptype" value="经营权"/></td>
 											<td>产权<input type="radio" name="shoptype" value="产权"/></td>
 										</tr>
 									</table>							
@@ -177,20 +177,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				 <div class="register-bottom-grid" id="divAdditionInfo" style="display: none">
 						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 							<span>身份证号码</span>
-							<input type="text" name="identityid"> 
+							<input type="text" name="userWithBLOBs.identityid"> 
 						 </div>
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
 							<span>QQ号码</span>
-							<input type="text"  name="qqnumber">
+							<input type="text"  name="userWithBLOBs.qqnumber">
 						 </div>
 						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 							<span>职业</span>
-							<input type="text" name="career"> 
+							<input type="text" name="userWithBLOBs.career"> 
 						 </div>
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
 							<span>年龄</span>
-							<input type="text" name="age">
-						 </div>						 
+							<input type="text" name="userWithBLOBs.age">
+						 </div>		
+						 <div class="wow fadeInRight" data-wow-delay="0.4s">
+							<span>备注</span>
+							<input type="text" name="userWithBLOBs.note">
+						 </div>							 
 				 </div>
 
 				<div class="clearfix"> </div>

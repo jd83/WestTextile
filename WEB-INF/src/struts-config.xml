@@ -14,7 +14,7 @@
             <result>/WEB-INF/jsp/registration.jsp</result>
         </action>            
         <action name="Register" method="registerUser" class="com.westtextile.action.Register">
- 
+            <result name="input">/WEB-INF/jsp/registration.jsp</result>
             <result>/WEB-INF/jsp/home.jsp</result>
         </action>        
     </package>

@@ -9,15 +9,16 @@ import com.westtextile.persistence.mybatis.model.*;
 import com.westtextile.dao.UserDao;
 public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao{	
 	
-	SqlSession session = this.getSqlSession();
-	UserMapper userMapper = session.getMapper(UserMapper.class);
+
 	public UserWithBLOBs getUserByUserId(int userId){
-//        SqlSession session = this.getSqlSession();
-//        UserMapper userMapper = session.getMapper(UserMapper.class);
+        SqlSession session = this.getSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
         return userMapper.selectByPrimaryKey(userId);
 	}
 	
 	public void insertUser(UserWithBLOBs user){
+		SqlSession session = this.getSqlSession();
+		UserMapper userMapper = session.getMapper(UserMapper.class);
 		userMapper.insert(user);
 	}
 

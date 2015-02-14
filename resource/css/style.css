@@ -1420,7 +1420,7 @@ a.go {
 	right: 26em;
 }
 .head-nav span.menu:before{
-	content:url(../resource/images/menu.png);
+	content:url(../images/menu.png);
 	color:#FFF;
 	font-size:1.3em;
 	text-transform:uppercase;

@@ -118,7 +118,7 @@ table td{
 	right: 0px;
 }
 .banner{
-	background:url(../resource/images/banner.jpg) no-repeat;
+	background:url(../images/banner.jpg) no-repeat;
 	background-size: cover;
 	-webkit-background-size:cover; 
 	-moz-background-size:cover;
