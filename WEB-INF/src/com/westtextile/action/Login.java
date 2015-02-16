@@ -33,7 +33,7 @@ import com.westtextile.dao.impl.UserDaoImpl;
 /**
  * <code>Set welcome message.</code>
  */
-public class Register extends ActionSupport {
+public class Login extends ActionSupport {
 
     /**
 	 * 
@@ -41,17 +41,13 @@ public class Register extends ActionSupport {
 	private static final long serialVersionUID = 5116793257658151173L;
 	private UserWithBLOBs userWithBLOBs;
 
-    private String shopname;
-    private String shoptype;
-    private String shopsquare;
-    private String shopamount;
 
     public String execute() throws Exception {
 
         return SUCCESS;
     }
     
-	public String registerUser() throws Exception {
+	public String loginUser() throws Exception {
 		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312"); 
 		userWithBLOBs.setUsername(username);
 		UserDaoImpl daoImpl =new UserDaoImpl();
@@ -65,38 +61,6 @@ public class Register extends ActionSupport {
 		}		
 	}
 	
-
-	public String getShopname() {
-		return shopname;
-	}
-
-	public void setShopname(String shopname) {
-		this.shopname = shopname;
-	}
-
-	public String getShoptype() {
-		return shoptype;
-	}
-
-	public void setShoptype(String shoptype) {
-		this.shoptype = shoptype;
-	}
-
-	public String getShopsquare() {
-		return shopsquare;
-	}
-
-	public void setShopsquare(String shopsquare) {
-		this.shopsquare = shopsquare;
-	}
-
-	public String getShopamount() {
-		return shopamount;
-	}
-
-	public void setShopamount(String shopamount) {
-		this.shopamount = shopamount;
-	}
 
 	public UserWithBLOBs getUserWithBLOBs() {
 		return userWithBLOBs;

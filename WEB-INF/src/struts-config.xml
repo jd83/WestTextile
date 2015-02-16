@@ -16,6 +16,13 @@
         <action name="Register" method="registerUser" class="com.westtextile.action.Register">
             <result name="input">/WEB-INF/jsp/registration.jsp</result>
             <result>/WEB-INF/jsp/home.jsp</result>
-        </action>        
+        </action>     
+        <action name="Login_Forward" class="com.westtextile.action.Login">
+            <result>/WEB-INF/jsp/login.jsp</result>
+        </action>            
+        <action name="Login" method="loginUser" class="com.westtextile.action.Login">
+            <result name="input">/WEB-INF/jsp/login.jsp</result>
+            <result>/WEB-INF/jsp/home.jsp</result>
+        </action>            
     </package>
 </struts>

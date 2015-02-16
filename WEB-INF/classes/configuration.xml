@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="persistence.mybatis.client.UserMapper.xml"/>
+		<mapper resource="com/westtextile/persistence/mybatis/mapper/UserMapper.xml"/>
 	</mappers>
 		
 </configuration>

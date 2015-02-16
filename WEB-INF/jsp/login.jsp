@@ -1,3 +1,4 @@
+<%@page import="org.apache.struts2.components.Include"%>
 <%@ page contentType="text/html;charset=gb2312" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -36,72 +37,54 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- header -->
 <table width="90%" border="0" cellpadding="0" cellspacing="0" align="center">
 	<tr><td>
-	<div class="header">
-  	    <div class="container">
-			<div class="header-top">
-				<div class="header-right">
-					<img src="../resource/images/logo.jpg" class="img-responsive" alt="" />
-				</div>
-				<div class="header-left" style="font-size:12px;font-family:微软雅黑">
-					<ul>
-						<s:if test="''==''">
-							<li><a href="Register">注册</a></li>
-							<li class="active"><a href="login.html">登录</a></li>
-						</s:if>
-						<s:else>
-							<li class="active"><a href="login.html">用户名</a></li>
-							<li><a href="#">退出</a></li>
-						</s:else>
-					</ul>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div> 				
-
-<!-- header -->
-			<div class="header-bottom"  style="background-color:#7CCD7C">
-				<div class="container">
-					<div class="head-nav" style="font-size:12px;font-family:微软雅黑">
-						<span class="menu"> </span>
-							<ul>
-								<li><a href="HelloWorld">主页</li>
-								<li><a href="about.html">维权历程</a></li>
-								<li><a href="news.html">资料馆</a></li>
-								<li><a href="news.html">问题建议</a></li>
-								<li><a href="events.html">联系我们</a></li>
-								<div class="clearfix"> </div>
-							</ul>
-					</div>
-					<div class="clearfix"> </div>
-					<!-- script-for-nav -->
-					<script>
-						$( "span.menu" ).click(function() {
-						  $( ".head-nav ul" ).slideToggle(300, function() {
-							// Animation complete.
-						  });
-						});
-					</script>
-					<!-- script-for-nav -->
-				</div>
-
-			</div>
+<%@include file="top.jsp" %>
 <!-- content -->
 	<div class="main-1" style="background-color:#7CCD7C">
-		<div class="container" style="min-height:270px">
+		<div class="container" style="min-height:270px" align="center">
+		  	  <form action="Login"> 
+
+				  	  <table border=1 cellpadding="0">
+				  	  <tr><td width="60%">
+					  	  <div class="login-top-grid" style="float:left;height:100%;width:100%;margin:0px">
+					  	  	<table border=1>
+						  	  	<tr><td align="center">
+									<h3>登录</h3>			  	  	
+						  	  	</td></tr>
+						  	  	<tr><td>
+									 <div class="wow fadeInLeft" data-wow-delay="0.4s" >
+										<span>手机/邮箱<label>*</label></span>
+										<input type="text" name="userWithBLOBs.username" size="60%"/> 
+									 </div>					  	  	
+						  	  	</td></tr>
+						  	  	<tr><td>
+									 <div class="wow fadeInLeft" data-wow-delay="0.4s">
+										<span>密码<label>*</label></span>
+										<input type="text" name="userWithBLOBs.password" size="60%"/>
+									 </div>				  	  	
+						  	  	</td></tr>				  	  	
+					  	  	</table>
+					  	  </div>
+				  	  </td></tr>
+				  	  <tr><td align="center">
+						<div class="clearfix"> </div>
+						<div class="register-but">
+						   <input type="submit" value="登录">
+						   <div class="clearfix"> </div>
+						</div>					  	  
+				  	  </td></tr>
+				  	  
+
+				  	  	
+				  	  </table>				 
+
+			
+			</form>	
 		</div>
 	</div>
 <!-- content -->
 <!-- footer -->
-	<div class="footer" style="background-color:#7CCD7C">
-		<div class="container">
-			<div class="bottom">
-				<p>Copyright &copy; 2015.West Textile Member All rights reserved.</p>
-			</div>
-		</div>
-	</div>
+<%@include file="footer.jsp" %>
 <!-- footer -->
-
-
 	</td></tr>
 </table>
 </body>

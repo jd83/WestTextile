@@ -5,11 +5,28 @@
 			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
 			<!-- 使用类构造器实例化 -->
-			<bean id="personService1" class="service.PersonServiceImpl"></bean>
+			<!--<bean id="personService1" class="service.PersonServiceImpl"></bean> -->
 			<!-- 使用静态工厂方法实例化 -->
-			<bean id="personService2" class="service.PersonServiceFactory" factory-method="createPersonService"></bean>
+			<!--<bean id="personService2" class="service.PersonServiceFactory" factory-method="createPersonService"></bean> -->
 			<!-- 使用实例工厂方法实例化 -->
-			<bean id="personServiceFactory" class="service.PersonServiceFactory"></bean>
-			<bean id="personService3" factory-bean="personServiceFactory" factory-method="createPersonServiceD"></bean>
-			
+			<!--<bean id="personServiceFactory" class="service.PersonServiceFactory"></bean> -->
+			<!--<bean id="personService3" factory-bean="personServiceFactory" factory-method="createPersonServiceD"></bean> -->
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:jdbc.properties"/>
+  </bean>			
+  <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
+     <property name="driverClassName" value="${driver}"/>
+     <property name="url" value="${url}"/>
+     <property name="username" value="${username}"/>
+     <property name="password" value="${password}"/>
+  </bean>			
+  <!--SessionFactory Description --> 
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+     <property name="dataSource" ref="dataSource" />
+     <property name="packagesToScan">
+        <list>
+          <value>com.lixing.shop.model</value>        
+        </list>
+     </property>
+  </bean>			
 </beans>
