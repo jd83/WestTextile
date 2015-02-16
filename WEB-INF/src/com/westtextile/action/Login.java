@@ -22,11 +22,12 @@
 package com.westtextile.action;
 
 
+import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.ServletActionContext;
 import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
 import com.westtextile.dao.impl.UserDaoImpl;
 
@@ -35,32 +36,34 @@ import com.westtextile.dao.impl.UserDaoImpl;
  */
 public class Login extends ActionSupport {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5116793257658151173L;
 	private UserWithBLOBs userWithBLOBs;
 
 
-    public String execute() throws Exception {
-
-        return SUCCESS;
-    }
-    
-	public String loginUser() throws Exception {
-		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312"); 
-		userWithBLOBs.setUsername(username);
-		UserDaoImpl daoImpl =new UserDaoImpl();
-		
-		try {
-			daoImpl.insertUser(userWithBLOBs);
-			return SUCCESS;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return INPUT;
-		}		
+	public String execute() throws Exception {
+		return SUCCESS;
 	}
 	
+	@Validations(requiredStrings={
+	        @RequiredStringValidator(fieldName="userWithBLOBs.username",message="用户名不能为空！"),
+	        @RequiredStringValidator(fieldName="userWithBLOBs.password",message="密码不能为空！")
+	    }
+	)
+	public String loginUser() throws Exception {
+		String username = new String(userWithBLOBs.getUsername().getBytes(
+				"ISO-8859-1"), "gb2312");
+		userWithBLOBs.setUsername(username);
+		
+		UserDaoImpl daoImpl = new UserDaoImpl();
+		userWithBLOBs=daoImpl.getUserByUserName(userWithBLOBs.getUsername());
+		
+		Map map=ActionContext.getContext().getSession();
+		map.put("username", userWithBLOBs.getUsername());
+		return SUCCESS;
+	}
 
 	public UserWithBLOBs getUserWithBLOBs() {
 		return userWithBLOBs;

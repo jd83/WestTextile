@@ -17,6 +17,13 @@ public class UserDaoImpl extends MySqlSessionDaoSupport implements UserDao{
         return userMapper.selectByPrimaryKey(userId);
 	}
 	
+	public UserWithBLOBs getUserByUserName(String username){
+		
+        SqlSession session =this.getSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        return userMapper.selectByUserName(username);
+	}
+	
 	public void insertUser(UserWithBLOBs user){
 		SqlSession session = this.getSqlSession();
 		UserMapper userMapper = session.getMapper(UserMapper.class);

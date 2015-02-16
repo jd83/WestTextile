@@ -71,7 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="main-1" style="background-color:#7CCD7C">
 		<div class="container">
 			<div class="register">
-		  	  <form action="Register"> 
+		  	  <form action="Register" method="POST"> 
 				 <div class="register-top-grid">
 					<h3>个人信息</h3>
 					 <div class="wow fadeInLeft" data-wow-delay="0.4s">

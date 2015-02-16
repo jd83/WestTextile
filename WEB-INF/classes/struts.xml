@@ -7,8 +7,21 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
+        
 
     <package name="default" namespace="/" extends="struts-default">
+    
+        <!-- 拦截器 -->
+        <interceptors>
+            <!-- 登录验证 -->
+            <interceptor name="loginVerify" class="com.westtextile.action.LoginInterceptor"></interceptor>
+            <interceptor-stack name="verify">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="loginVerify"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>        
+        <default-interceptor-ref name="verify"></default-interceptor-ref>  
+    
 
         <default-action-ref name="index" />
 

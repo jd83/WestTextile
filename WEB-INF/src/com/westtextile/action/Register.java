@@ -23,10 +23,8 @@ package com.westtextile.action;
 
 
 
-import javax.servlet.http.HttpSession;
 
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.ServletActionContext;
 import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
 import com.westtextile.dao.impl.UserDaoImpl;
 

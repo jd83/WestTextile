@@ -64,50 +64,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- header -->
 <table width="90%" border="0" cellpadding="0" cellspacing="0" align="center">
 	<tr><td>
-	<div class="header">
-  	    <div class="container">
-			<div class="header-top">
-				<div class="header-right">
-					<img src="../resource/images/logo.jpg" class="img-responsive" alt="" />
-				</div>
-				<div class="header-left" style="font-size:12px;font-family:微软雅黑">
-					<ul>
-						<li><a href="Register_Forward">注册</a></li>
-						<li class="active"><a href="login.html">登录</a></li>
-					</ul>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div> 				
-
-<!-- header -->
-			<div class="header-bottom"  style="background-color:#7CCD7C">
-				<div class="container">
-					<div class="head-nav" style="font-size:11px;font-family:微软雅黑">
-						<span class="menu"> </span>
-							<ul>
-								<li><a href="HelloWorld.action">主页</li>
-								<li><a href="about.html">商铺查询</a></li>
-								<li><a href="about.html">费用管理</a></li>
-								<li><a href="news.html">资料馆</a></li>
-								<li><a href="news.html">问题建议</a></li>
-								<li><a href="events.html">联系我们</a></li>
-								<div class="clearfix"> </div>
-							</ul>
-					</div>
-					<div class="clearfix"> </div>
-					<!-- script-for-nav -->
-					<script>
-						$( "span.menu" ).click(function() {
-						  $( ".head-nav ul" ).slideToggle(300, function() {
-							// Animation complete.
-						  });
-						});
-					</script>
-					<!-- script-for-nav -->
-				</div>
-
-			</div>
+<%@include file="top.jsp" %>
 <!-- content -->
 
 <!-- registration -->
@@ -190,7 +147,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
 							<span>年龄</span>
 							<input type="text" name="userWithBLOBs.age">
-						 </div>						 
+						 </div>		
+						 <div class="wow fadeInRight" data-wow-delay="0.4s">
+							<span>备注</span>
+							<input type="text" name="userWithBLOBs.note">
+						 </div>							 
 				 </div>
 
 				<div class="clearfix"> </div>
@@ -204,16 +165,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 <!-- registration -->
 <!-- content -->
-<!-- footer -->
-	<div class="footer" style="background-color:#7CCD7C">
-		<div class="container">
-			<div class="bottom">
-				<p>Copyright &copy; 2015.West Textile Member All rights reserved.</p>
-			</div>
-		</div>
-	</div>
-<!-- footer -->
 
+<%@include file="footer.jsp" %>
 
 	</td></tr>
 </table>
