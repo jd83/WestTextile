@@ -200,7 +200,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_005fif_005f0.setPageContext(_jspx_page_context);
     _jspx_th_s_005fif_005f0.setParent(null);
     // /WEB-INF/jsp/top.jsp(10,6) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fif_005f0.setTest("null==#session.userWithBLOBs||#session.userWithBLOBs.username.isEmpty()");
+    _jspx_th_s_005fif_005f0.setTest("null==#session.username||#session.username.isEmpty()");
     int _jspx_eval_s_005fif_005f0 = _jspx_th_s_005fif_005f0.doStartTag();
     if (_jspx_eval_s_005fif_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       if (_jspx_eval_s_005fif_005f0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
@@ -246,11 +246,11 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       }
       do {
         out.write("\r\n");
-        out.write("\t\t\t\t\t\t\t<li class=\"active\"><a href=\"#\">#");
+        out.write("\t\t\t\t\t\t\t<li class=\"active\"><a href=\"Register_Forward\">");
         if (_jspx_meth_s_005fproperty_005f0(_jspx_th_s_005felse_005f0, _jspx_page_context))
           return true;
-        out.write("#</a></li>\r\n");
-        out.write("\t\t\t\t\t\t\t<li><a href=\"#\">退出</a></li>\r\n");
+        out.write("</a></li>\r\n");
+        out.write("\t\t\t\t\t\t\t<li><a href=\"Logout\">退出</a></li>\r\n");
         out.write("\t\t\t\t\t\t");
         int evalDoAfterBody = _jspx_th_s_005felse_005f0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
@@ -276,8 +276,8 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f0 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f0.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005felse_005f0);
-    // /WEB-INF/jsp/top.jsp(15,39) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f0.setValue("#session.userWithBLOBs.username");
+    // /WEB-INF/jsp/top.jsp(15,53) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f0.setValue("#session.username");
     int _jspx_eval_s_005fproperty_005f0 = _jspx_th_s_005fproperty_005f0.doStartTag();
     if (_jspx_th_s_005fproperty_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f0);

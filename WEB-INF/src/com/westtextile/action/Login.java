@@ -24,11 +24,16 @@ package com.westtextile.action;
 
 import java.util.Map;
 
+import org.apache.struts2.interceptor.validation.SkipValidation;
+
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
+import com.westtextile.service.LoginService;
+import com.westtextile.service.impl.LoginServiceImpl;
+import com.westtextile.dao.UserDao;
 import com.westtextile.dao.impl.UserDaoImpl;
 
 /**
@@ -43,6 +48,8 @@ public class Login extends ActionSupport {
 	private UserWithBLOBs userWithBLOBs;
 
 
+
+	@SkipValidation
 	public String execute() throws Exception {
 		return SUCCESS;
 	}
@@ -53,18 +60,33 @@ public class Login extends ActionSupport {
 	    }
 	)
 	public String loginUser() throws Exception {
+		String result;
 		String username = new String(userWithBLOBs.getUsername().getBytes(
 				"ISO-8859-1"), "gb2312");
 		userWithBLOBs.setUsername(username);
 		
-		UserDaoImpl daoImpl = new UserDaoImpl();
-		userWithBLOBs=daoImpl.getUserByUserName(userWithBLOBs.getUsername());
+		//check password and user
+		LoginService service=new LoginServiceImpl();
+		boolean isCorrect=service.checkLoginInfo(username, userWithBLOBs.getPassword());
 		
-		Map map=ActionContext.getContext().getSession();
-		map.put("username", userWithBLOBs.getUsername());
-		return SUCCESS;
+		if(isCorrect){
+			Map map=ActionContext.getContext().getSession();
+			map.put("username", userWithBLOBs.getUsername());
+			result= SUCCESS;
+		}else {
+			this.addFieldError("userWithBLOBs.username", "√‹¬Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î£°");
+			result= INPUT;
+		}
+		return result;
 	}
 
+	@SkipValidation
+	public String logoutUser() throws Exception {
+		Map map=ActionContext.getContext().getSession();
+		map.remove("username");
+		return SUCCESS;
+	}
+	
 	public UserWithBLOBs getUserWithBLOBs() {
 		return userWithBLOBs;
 	}

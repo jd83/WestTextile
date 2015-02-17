@@ -7,13 +7,13 @@
 				</div>
 				<div class="header-left" style="font-size:12px;font-family:Î¢ÈíÑÅºÚ">
 					<ul>
-						<s:if test="null==#session.userWithBLOBs||#session.userWithBLOBs.username.isEmpty()">
+						<s:if test="null==#session.username||#session.username.isEmpty()">
 							<li><a href="Register_Forward">×¢²á</a></li>
 							<li class="active"><a href="Login_Forward">µÇÂ¼</a></li>
 						</s:if>
 						<s:else>
-							<li class="active"><a href="#">#<s:property value="#session.userWithBLOBs.username"/>#</a></li>
-							<li><a href="#">ÍË³ö</a></li>
+							<li class="active"><a href="Register_Forward"><s:property value="#session.username"/></a></li>
+							<li><a href="Logout">ÍË³ö</a></li>
 						</s:else>
 					</ul>
 				</div>

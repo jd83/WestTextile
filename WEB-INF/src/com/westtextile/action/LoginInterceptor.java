@@ -18,6 +18,8 @@ public class LoginInterceptor extends AbstractInterceptor {
 		Map sessionMap = invocation.getInvocationContext().getSession();
 		if (!invocation.getAction().getClass().getName().endsWith("Home")
 				&& !invocation.getAction().getClass().getName().endsWith("Login_Forward")
+				&& !invocation.getAction().getClass().getName().endsWith("Login")
+				&& !invocation.getAction().getClass().getName().endsWith("Logout")
 				&& !invocation.getAction().getClass().getName().endsWith("Register_Forward")
 				&& !invocation.getAction().getClass().getName().endsWith("Register")
 				&& (sessionMap.get("username") == null) ) {

@@ -24,6 +24,9 @@ package com.westtextile.action;
 
 
 
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
 import com.westtextile.dao.impl.UserDaoImpl;
@@ -38,6 +41,7 @@ public class Register extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 5116793257658151173L;
 	private UserWithBLOBs userWithBLOBs;
+	private String repassword;
 
     private String shopname;
     private String shoptype;
@@ -45,25 +49,53 @@ public class Register extends ActionSupport {
     private String shopamount;
 
     public String execute() throws Exception {
-
+    	//if login,show user info edit,else show user register
+    	String loginUsername;
+    	Map map=ActionContext.getContext().getSession();    	
+    	loginUsername=(map==null||map.size()==0)?"":map.get("username").toString();
+    	if(loginUsername!=null && loginUsername!=""){
+    		UserDaoImpl daoImpl =new UserDaoImpl();
+    		userWithBLOBs=daoImpl.getUserByUserName(loginUsername);
+    		this.setUserWithBLOBs(userWithBLOBs);
+    	}
         return SUCCESS;
     }
     
 	public String registerUser() throws Exception {
+		String result=INPUT;
 		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312"); 
 		userWithBLOBs.setUsername(username);
 		UserDaoImpl daoImpl =new UserDaoImpl();
 		
-		try {
+		checkUserInfo();
+		if(!this.hasErrors()){
 			daoImpl.insertUser(userWithBLOBs);
-			return SUCCESS;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return INPUT;
+			result=SUCCESS;
 		}		
+		return result;
+	}
+
+	public String updateUser() throws Exception {
+		String result=INPUT;
+		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312"); 
+		userWithBLOBs.setUsername(username);
+		UserDaoImpl daoImpl =new UserDaoImpl();
+				
+		checkUserInfo();
+		if(!this.hasErrors()){
+			daoImpl.updateByUserName(userWithBLOBs);
+			result=SUCCESS;
+		}		
+		return result;			
 	}
 	
-
+	public void checkUserInfo() {
+		//check password
+		if(!repassword.equals(userWithBLOBs.getPassword())){
+			this.addFieldError("repassword", "两次密码必须一致！");
+		}
+	}
+	
 	public String getShopname() {
 		return shopname;
 	}
@@ -102,6 +134,15 @@ public class Register extends ActionSupport {
 
 	public void setUserWithBLOBs(UserWithBLOBs userWithBLOBs) {
 		this.userWithBLOBs = userWithBLOBs;
+	}
+
+
+	public String getRepassword() {
+		return repassword;
+	}
+
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
 	}
 
 }

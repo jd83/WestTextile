@@ -32,4 +32,13 @@ public class UserDaoImpl extends MySqlSessionDaoSupport implements UserDao{
 		session.close();
 	}
 
+	public int updateByUserName(UserWithBLOBs user){
+		SqlSession session = this.getSqlSession();
+		UserMapper userMapper = session.getMapper(UserMapper.class);
+		int result=userMapper.updateByUserNameWithBLOBs(user);
+		session.commit();
+		session.close();
+		return result;
+	}
+	
 }

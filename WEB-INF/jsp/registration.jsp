@@ -71,24 +71,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="main-1" style="background-color:#7CCD7C">
 		<div class="container">
 			<div class="register">
-		  	  <form action="Register" method="POST"> 
+		  	  <form action="<s:if test='#session.username==null||#session.username.isEmpty()'>Register</s:if><s:else>Register_Update</s:else>" method="POST"> 
 				 <div class="register-top-grid">
+					<s:fielderror></s:fielderror>
 					<h3>个人信息</h3>
 					 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 						<span>手机/邮箱<label>*</label></span>
-						<input type="text" name="userWithBLOBs.username"/> 
+						<input type="text" name="userWithBLOBs.username" value="<s:property value='#request.userWithBLOBs.username'/>"/> 
 					 </div>
 					 <div class="wow fadeInRight" data-wow-delay="0.4s">
 						<span>QQ名<label>*</label></span>
-						<input type="text"  name="userWithBLOBs.displayname"> 
+						<input type="text"  name="userWithBLOBs.displayname" value="<s:property value='#request.userWithBLOBs.displayname'/>"/> 
 					 </div>
 					 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 						<span>密码<label>*</label></span>
-						<input type="text" name="userWithBLOBs.password">
+						<input type="text" name="userWithBLOBs.password" value="<s:property value='#request.userWithBLOBs.password'/>"/>
 					 </div>
 					 <div class="wow fadeInRight" data-wow-delay="0.4s">
 						<span>确认密码<label>*</label></span>
-						<input type="text">
+						<input type="text" name="repassword"/>
 					 </div>
 
 					 <div class="clearfix"> </div>
@@ -134,29 +135,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				 <div class="register-bottom-grid" id="divAdditionInfo" style="display: none">
 						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 							<span>身份证号码</span>
-							<input type="text" name="userWithBLOBs.identityid"> 
+							<input type="text" name="userWithBLOBs.identityid" value="<s:property value='#request.userWithBLOBs.identityid'/>"/> 
 						 </div>
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
 							<span>QQ号码</span>
-							<input type="text"  name="userWithBLOBs.qqnumber">
+							<input type="text"  name="userWithBLOBs.qqnumber" value="<s:property value='#request.userWithBLOBs.qqnumber'/>"/>
 						 </div>
 						 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 							<span>职业</span>
-							<input type="text" name="userWithBLOBs.career"> 
+							<input type="text" name="userWithBLOBs.career" value="<s:property value='#request.userWithBLOBs.career'/>"/> 
 						 </div>
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
 							<span>年龄</span>
-							<input type="text" name="userWithBLOBs.age">
+							<input type="text" name="userWithBLOBs.age" value="<s:property value='#request.userWithBLOBs.age'/>"/>
 						 </div>		
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
 							<span>备注</span>
-							<input type="text" name="userWithBLOBs.note">
+							<input type="text" name="userWithBLOBs.note" value="<s:property value='#request.userWithBLOBs.note'/>"/>
 						 </div>							 
 				 </div>
 
 				<div class="clearfix"> </div>
 				<div class="register-but">
-				   <input type="submit" value="注册">
+				   <input type="submit" value="<s:if test='#session.username==null||#session.username.isEmpty()'>注册</s:if><s:else>修改</s:else>">
 				   <div class="clearfix"> </div>
 				</div>
 			</form>
