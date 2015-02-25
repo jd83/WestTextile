@@ -28,7 +28,12 @@ import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.westtextile.persistence.mybatis.model.Shops;
 import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
+import com.westtextile.service.RegisterService;
+import com.westtextile.service.impl.RegisterServiceImpl;
+import com.westtextile.dao.ShopsDao;
+import com.westtextile.dao.impl.ShopsDaoImpl;
 import com.westtextile.dao.impl.UserDaoImpl;
 
 /**
@@ -43,10 +48,7 @@ public class Register extends ActionSupport {
 	private UserWithBLOBs userWithBLOBs;
 	private String repassword;
 
-    private String shopname;
-    private String shoptype;
-    private String shopsquare;
-    private String shopamount;
+	private Shops shop;
 
     public String execute() throws Exception {
     	//if login,show user info edit,else show user register
@@ -63,15 +65,18 @@ public class Register extends ActionSupport {
     
 	public String registerUser() throws Exception {
 		String result=INPUT;
-		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312"); 
+		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312");
 		userWithBLOBs.setUsername(username);
-		UserDaoImpl daoImpl =new UserDaoImpl();
-		
+		//insert user
+		RegisterService registerService =new RegisterServiceImpl();		
 		checkUserInfo();
 		if(!this.hasErrors()){
-			daoImpl.insertUser(userWithBLOBs);
+			registerService.addUser(userWithBLOBs);
 			result=SUCCESS;
-		}		
+		}	
+		//insert shop
+		registerService.addShop(shop);
+		
 		return result;
 	}
 
@@ -79,13 +84,17 @@ public class Register extends ActionSupport {
 		String result=INPUT;
 		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312"); 
 		userWithBLOBs.setUsername(username);
-		UserDaoImpl daoImpl =new UserDaoImpl();
-				
+
+
+		RegisterService registerService =new RegisterServiceImpl();					
 		checkUserInfo();
 		if(!this.hasErrors()){
-			daoImpl.updateByUserName(userWithBLOBs);
+			registerService.updateUser(userWithBLOBs);
 			result=SUCCESS;
 		}		
+		
+		//insert shop
+		registerService.addShop(shop);
 		return result;			
 	}
 	
@@ -96,37 +105,6 @@ public class Register extends ActionSupport {
 		}
 	}
 	
-	public String getShopname() {
-		return shopname;
-	}
-
-	public void setShopname(String shopname) {
-		this.shopname = shopname;
-	}
-
-	public String getShoptype() {
-		return shoptype;
-	}
-
-	public void setShoptype(String shoptype) {
-		this.shoptype = shoptype;
-	}
-
-	public String getShopsquare() {
-		return shopsquare;
-	}
-
-	public void setShopsquare(String shopsquare) {
-		this.shopsquare = shopsquare;
-	}
-
-	public String getShopamount() {
-		return shopamount;
-	}
-
-	public void setShopamount(String shopamount) {
-		this.shopamount = shopamount;
-	}
 
 	public UserWithBLOBs getUserWithBLOBs() {
 		return userWithBLOBs;
@@ -143,6 +121,14 @@ public class Register extends ActionSupport {
 
 	public void setRepassword(String repassword) {
 		this.repassword = repassword;
+	}
+
+	public Shops getShop() {
+		return shop;
+	}
+
+	public void setShop(Shops shop) {
+		this.shop = shop;
 	}
 
 }

@@ -103,26 +103,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						 <span>增加商铺<input type="button" value="+" onclick="addShopInfo();"/>&nbsp&nbsp删除商铺<input type="button" value="-" onclick="removeShopInfo(this.parentNode.parentNode);"/></span>
 							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 								<span>商铺号<label>*</label></span>
-								<input type="text" name="shopname"  value="格式：x-x-x。如1-1-1" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
+								<input type="text" name="shop.shopname"  value="<s:property value='#request.shop.displayname'/>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
 							 </div>
 							 <div class="wow fadeInRight" data-wow-delay="0.4s">
 								<span>商铺类型<label>*</label></span>
 								<div>
 									<table>
 										<tr>
-											<td>经营权<input type="radio" name="shoptype" value="经营权"/></td>
-											<td>产权<input type="radio" name="shoptype" value="产权"/></td>
+											<td>经营权<input type="radio" name="shop.shoptype" value="经营权"/></td>
+											<td>产权<input type="radio" name="shop.shoptype" value="产权"/></td>
 										</tr>
 									</table>							
 								</div>
 							 </div>
 							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 								<span>商铺面积<label>*</label></span>
-								<input type="text" name="shopsquare"> 
+								<input type="text" name="shop.shopsquare"> 
 							 </div>
 							 <div class="wow fadeInRight" data-wow-delay="0.4s">
 								<span>商铺总价<label>*</label></span>
-								<input type="text" name="shopamount">
+								<input type="text" name="shop.shopamount">
 							 </div>
 					 </div>
 				  </div>

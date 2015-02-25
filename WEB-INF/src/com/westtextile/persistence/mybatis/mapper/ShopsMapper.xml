@@ -38,6 +38,12 @@
     from shops
     where shopid = #{shopid,jdbcType=INTEGER}
   </select>
+  <select id="selectByShopName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shops
+    where shopname = #{shopname,jdbcType=VARCHAR}
+  </select>  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbggenerated
@@ -47,6 +53,10 @@
     delete from shops
     where shopid = #{shopid,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByShopName" parameterType="java.lang.String">
+    delete from shops
+    where shopname = #{shopname,jdbcType=VARCHAR}
+  </delete>  
   <insert id="insert" parameterType="com.westtextile.persistence.mybatis.model.Shops">
     <!--
       WARNING - @mbggenerated
