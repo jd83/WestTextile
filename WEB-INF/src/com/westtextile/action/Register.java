@@ -24,6 +24,8 @@ package com.westtextile.action;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -33,6 +35,7 @@ import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
 import com.westtextile.service.RegisterService;
 import com.westtextile.service.impl.RegisterServiceImpl;
 import com.westtextile.dao.ShopsDao;
+import com.westtextile.dao.UserDao;
 import com.westtextile.dao.impl.ShopsDaoImpl;
 import com.westtextile.dao.impl.UserDaoImpl;
 
@@ -49,37 +52,60 @@ public class Register extends ActionSupport {
 	private String repassword;
 
 	private Shops shop;
+	private List<Shops> shops;
 
     public String execute() throws Exception {
+    	refresh();
+        return SUCCESS;
+    }
+    
+    public void refresh(){
+    	RegisterService registerService=new RegisterServiceImpl();
     	//if login,show user info edit,else show user register
     	String loginUsername;
     	Map map=ActionContext.getContext().getSession();    	
     	loginUsername=(map==null||map.size()==0)?"":map.get("username").toString();
     	if(loginUsername!=null && loginUsername!=""){
-    		UserDaoImpl daoImpl =new UserDaoImpl();
-    		userWithBLOBs=daoImpl.getUserByUserName(loginUsername);
+    		userWithBLOBs=registerService.getUserByUserName(loginUsername);
+    		shops=registerService.getShopByUserName(loginUsername);
     		this.setUserWithBLOBs(userWithBLOBs);
     	}
-        return SUCCESS;
+		if(shops==null||shops.size()==0){
+			shops=new ArrayList<Shops>();
+			shops.add(new Shops());
+		}
     }
     
+    
 	public String registerUser() throws Exception {
-		String result=INPUT;
-		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312");
+		String result = INPUT;
+		String username = new String(userWithBLOBs.getUsername().getBytes(
+				"ISO-8859-1"), "gb2312");
 		userWithBLOBs.setUsername(username);
-		//insert user
-		RegisterService registerService =new RegisterServiceImpl();		
+
+		RegisterService registerService = new RegisterServiceImpl();
+		UserDao userDao = new UserDaoImpl();
+		//basic check
 		checkUserInfo();
-		if(!this.hasErrors()){
+		// username exist check
+		UserWithBLOBs user = userDao.getUserByUserName(userWithBLOBs
+				.getUsername());
+		if (user != null) {
+			this.addFieldError("username", "该手机/邮箱已经注册！");
+		}
+		if (!this.hasErrors()) {
+			// insert user
+			// username exist check
 			registerService.addUser(userWithBLOBs);
-			result=SUCCESS;
-		}	
-		//insert shop
-		registerService.addShop(shop);
-		
+
+			// insert shop
+			registerService.addShop(shop);
+			result = SUCCESS;
+		}
 		return result;
 	}
 
+	
 	public String updateUser() throws Exception {
 		String result=INPUT;
 		String username=new String(userWithBLOBs.getUsername().getBytes("ISO-8859-1"),"gb2312"); 
@@ -90,11 +116,11 @@ public class Register extends ActionSupport {
 		checkUserInfo();
 		if(!this.hasErrors()){
 			registerService.updateUser(userWithBLOBs);
+			//insert shop
+			registerService.addShop(shop);
 			result=SUCCESS;
-		}		
-		
-		//insert shop
-		registerService.addShop(shop);
+		}	
+		refresh();
 		return result;			
 	}
 	
@@ -102,6 +128,10 @@ public class Register extends ActionSupport {
 		//check password
 		if(!repassword.equals(userWithBLOBs.getPassword())){
 			this.addFieldError("repassword", "两次密码必须一致！");
+		}
+		//check shop type
+		if(!shop.getShopname().isEmpty()&&shop.getShoptype()==null){
+			this.addFieldError("shop.shoptype", "必须选择商铺类型！");
 		}
 	}
 	
@@ -129,6 +159,14 @@ public class Register extends ActionSupport {
 
 	public void setShop(Shops shop) {
 		this.shop = shop;
+	}
+
+	public List<Shops> getShops() {
+		return shops;
+	}
+
+	public void setShops(List<Shops> shops) {
+		this.shops = shops;
 	}
 
 }

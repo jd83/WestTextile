@@ -98,33 +98,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					   </a>
 				</div>
 				 <div class="register-bottom-grid" id="divShopInfoAuto" style="display: none">	
-				
-					 <div class="register-bottom-grid" id="divShopInfo" style="display: none">
-						 <span>增加商铺<input type="button" value="+" onclick="addShopInfo();"/>&nbsp&nbsp删除商铺<input type="button" value="-" onclick="removeShopInfo(this.parentNode.parentNode);"/></span>
-							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
-								<span>商铺号<label>*</label></span>
-								<input type="text" name="shopname"  value="格式：x-x-x。如1-1-1" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
-							 </div>
-							 <div class="wow fadeInRight" data-wow-delay="0.4s">
-								<span>商铺类型<label>*</label></span>
-								<div>
-									<table>
-										<tr>
-											<td>经营权<input type="radio" name="shoptype" value="经营权"/></td>
-											<td>产权<input type="radio" name="shoptype" value="产权"/></td>
-										</tr>
-									</table>							
-								</div>
-							 </div>
-							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
-								<span>商铺面积<label>*</label></span>
-								<input type="text" name="shopsquare"> 
-							 </div>
-							 <div class="wow fadeInRight" data-wow-delay="0.4s">
-								<span>商铺总价<label>*</label></span>
-								<input type="text" name="shopamount">
-							 </div>
-					 </div>
+					<s:iterator value="shops" id="shop"> 
+						 <div class="register-bottom-grid" id="divShopInfo" style="display: none">
+							 <span>增加商铺<input type="button" value="+" onclick="addShopInfo();"/>&nbsp&nbsp删除商铺<input type="button" value="-" onclick="removeShopInfo(this.parentNode.parentNode);"/></span>
+								 <div class="wow fadeInLeft" data-wow-delay="0.4s">
+									<span>商铺号<label>*</label></span>
+									<input type="text" name="shop.shopname"  value="<s:property value='#shop.shopname'/>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
+								 </div>
+								 <div class="wow fadeInRight" data-wow-delay="0.4s">
+									<span>商铺类型<label>*</label></span>
+									<div>
+										<table>
+											<tr>
+												<td>经营权<input type="radio" name="shop.shoptype" value="经营权"/></td>
+												<td>产权<input type="radio" name="shop.shoptype" value="产权"/></td>
+											</tr>
+										</table>							
+									</div>
+								 </div>
+								 <div class="wow fadeInLeft" data-wow-delay="0.4s">
+									<span>商铺面积<label>*</label></span>
+									<input type="text" name="shop.shopsquare1" value="<s:property value='#shop.shopsquare'/>"/> 
+								 </div>
+								 <div class="wow fadeInRight" data-wow-delay="0.4s">
+									<span>商铺总价<label>*</label></span>
+									<input type="text" name="shop.shopamount2" value="<s:property value='#shop.shopamount'/>"/>
+								 </div>
+						 </div>
+					</s:iterator> 
 				  </div>
 				 <div class="register-top-grid">
 					 <div class="clearfix"> </div>

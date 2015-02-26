@@ -12,6 +12,7 @@ public class LoginServiceImpl implements LoginService{
 		UserDao daoImpl = new UserDaoImpl();
 		UserWithBLOBs userWithBLOBs=daoImpl.getUserByUserName(username);
 		
+		//password check
 		if(userWithBLOBs!=null && userWithBLOBs.getPassword().equals(password)){
 			isCorrect=true;
 		}

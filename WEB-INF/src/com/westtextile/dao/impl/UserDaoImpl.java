@@ -29,7 +29,7 @@ public class UserDaoImpl extends MySqlSessionDaoSupport implements UserDao{
 		UserMapper userMapper = session.getMapper(UserMapper.class);
 		userMapper.insert(user);
 		session.commit();
-		session.close();
+//		session.close();
 	}
 
 	public int updateByUserName(UserWithBLOBs user){
@@ -37,7 +37,7 @@ public class UserDaoImpl extends MySqlSessionDaoSupport implements UserDao{
 		UserMapper userMapper = session.getMapper(UserMapper.class);
 		int result=userMapper.updateByUserNameWithBLOBs(user);
 		session.commit();
-		session.close();
+//		session.close();
 		return result;
 	}
 	
