@@ -47,14 +47,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		function addShopInfo(){
 			var divShopInfo=document.getElementById("divShopInfo").cloneNode(true);
 			var top=document.getElementById("divShopInfoAuto");
-			var divShopInfoCnt=top.childNodes.length;
-			divShopInfo.id="divShopInfo-"+(divShopInfoCnt-2);
-			top.appendChild(divShopInfo);
+			//divShopInfo.id="divShopInfo-"+divShopInfoCnt;
+
+			top.appendChild(divShopInfo);			
+			divShopInfos=document.getElementsByName("divShopInfo");
+			divShopInfoCnt=divShopInfos.length;
+
+			for (var k=0;k<divShopInfoCnt;k++)
+			{
+				var shopInfoNode=divShopInfos.item(k);
+				var topNodeList=shopInfoNode.childNodes
+				if(k>0){
+					shopInfoNode.id="divShopInfo-"+k;
+				}
+				for(var i=0;i<topNodeList.length;i++){
+					
+					if(topNodeList.item(i).tagName!=undefined && topNodeList.item(i).tagName=="DIV"){
+						var divNodeList=topNodeList.item(i).getElementsByTagName("INPUT");
+						//var divNodeList=topNodeList.item(i).childNodes;
+						for(var j=0;j<divNodeList.length;j++){
+							
+							var elementName="shops["+k+"]."+divNodeList.item(j).id;
+							divNodeList.item(j).name=elementName;
+						}
+					}
+				}
+			}
+
+
 		}
 
 		function removeShopInfo(obj){
 			var top=document.getElementById("divShopInfoAuto");
-			if(obj.id!="divShopInfo"){
+			var div=document.getElementsByName("divShopInfo");
+			if(div.length>1){
 				top.removeChild(obj);
 			}			
 		}
@@ -73,11 +99,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="register">
 		  	  <form action="<s:if test='#session.username==null||#session.username.isEmpty()'>Register</s:if><s:else>Register_Update</s:else>" method="POST"> 
 				 <div class="register-top-grid">
-					<s:fielderror></s:fielderror>
+					<font color="red" size="6"><s:fielderror></s:fielderror></font>
 					<h3>个人信息</h3>
 					 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 						<span>手机/邮箱<label>*</label></span>
 						<input type="text" name="userWithBLOBs.username" value="<s:property value='#request.userWithBLOBs.username'/>"/> 
+						<s:hidden theme="simple" name="userWithBLOBs.userid"></s:hidden>
 					 </div>
 					 <div class="wow fadeInRight" data-wow-delay="0.4s">
 						<span>QQ名<label>*</label></span>
@@ -98,31 +125,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					   </a>
 				</div>
 				 <div class="register-bottom-grid" id="divShopInfoAuto" style="display: none">	
-					<s:iterator value="shops" id="shop"> 
-						 <div class="register-bottom-grid" id="divShopInfo" style="display: none">
+					<s:iterator value="shops" id="sp" status="u"> 
+						 <div class="register-bottom-grid" id="divShopInfo" name="divShopInfo">
 							 <span>增加商铺<input type="button" value="+" onclick="addShopInfo();"/>&nbsp&nbsp删除商铺<input type="button" value="-" onclick="removeShopInfo(this.parentNode.parentNode);"/></span>
-								 <div class="wow fadeInLeft" data-wow-delay="0.4s">
+								 <div class="wow fadeInLeft" name="divShopName" data-wow-delay="0.4s">
 									<span>商铺号<label>*</label></span>
-									<input type="text" name="shop.shopname"  value="<s:property value='#shop.shopname'/>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
+									<input type="text" name="shops[<s:property value='#u.index'/>].shopname" id="shopname" value="<s:property value='#sp.shopname'/>" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
 								 </div>
-								 <div class="wow fadeInRight" data-wow-delay="0.4s">
+								 <div class="wow fadeInRight" name="divShopType" data-wow-delay="0.4s">
 									<span>商铺类型<label>*</label></span>
-									<div>
-										<table>
-											<tr>
-												<td>经营权<input type="radio" name="shop.shoptype" value="经营权"/></td>
-												<td>产权<input type="radio" name="shop.shoptype" value="产权"/></td>
-											</tr>
-										</table>							
-									</div>
+									<input type="text" name="shops[<s:property value='#u.index'/>].shoptype" id="shoptype" value="<s:property value='#sp.shoptype'/>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '经营权或产权';}"> 
 								 </div>
-								 <div class="wow fadeInLeft" data-wow-delay="0.4s">
+								 <div class="wow fadeInLeft" name="divShopSquare" data-wow-delay="0.4s">
 									<span>商铺面积<label>*</label></span>
-									<input type="text" name="shop.shopsquare1" value="<s:property value='#shop.shopsquare'/>"/> 
+									<input type="text" name="shops[<s:property value='#u.index'/>].shopsquare" id="shopsquare" value="<s:property value='#sp.shopsquare'/>"/> 
 								 </div>
-								 <div class="wow fadeInRight" data-wow-delay="0.4s">
+								 <div class="wow fadeInRight" name="divShopAmount" data-wow-delay="0.4s">
 									<span>商铺总价<label>*</label></span>
-									<input type="text" name="shop.shopamount2" value="<s:property value='#shop.shopamount'/>"/>
+									<input type="text" name="shops[<s:property value='#u.index'/>].shopamount" id="shopamount" value="<s:property value='#sp.shopamount'/>"/>
 								 </div>
 						 </div>
 					</s:iterator> 

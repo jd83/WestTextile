@@ -42,4 +42,12 @@ public class ShopsDaoImpl extends MySqlSessionDaoSupport implements ShopsDao{
 		session.commit();
 		return result;
 	}
+	
+	public int deleteShopByUserId(int userid){
+		int result=0;
+		SqlSession session = this.getSqlSession();
+		ShopsMapper shopMapper = session.getMapper(ShopsMapper.class);
+		result=shopMapper.deleteByUserId(userid);
+		return result;
+	}
 }

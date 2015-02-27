@@ -2,6 +2,7 @@ package com.westtextile.service.impl;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -47,22 +48,24 @@ public class RegisterServiceImpl implements RegisterService{
 		return shopList;
 	}
 	
-	public void addShop(Shops shop){
+	public void addShops(List<Shops> shops){
 //		UserDao userDao=new UserDaoImpl();
 		
 		try {
-			//data prepare
-			String[] shopnames=shop.getShopname().split("-");
-			shop.setBuildnumber(Integer.parseInt(shopnames[0]));
-			shop.setFloornumber(Integer.parseInt(shopnames[1]));
 			//get userid
 			String username=ActionContext.getContext().getSession().get("username").toString();
 			int userid=userDao.getUserByUserName(username).getUserid();
-			shop.setUserid(userid);
 			//delete shop of this user
-			shopsDao.deleteShopByShopName(shop.getShopname());
-			//data insert		
-			shopsDao.insertShop(shop);
+			shopsDao.deleteShopByUserId(userid);
+			for (Iterator iterator = shops.iterator(); iterator.hasNext();) {
+				Shops shop = (Shops) iterator.next();
+				//data prepare
+				String[] shopnames=shop.getShopname().split("-");
+				shop.setBuildnumber(Integer.parseInt(shopnames[0]));
+				shop.setFloornumber(Integer.parseInt(shopnames[1]));
+				//data insert		
+				shopsDao.insertShop(shop);				
+			}
 		} catch (NumberFormatException e) {
 			throw e;
 		}

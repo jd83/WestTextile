@@ -44,4 +44,5 @@ public interface ShopsMapper {
 	 */
 	int updateByPrimaryKey(Shops record);
 	int deleteByShopName(String shopname);
+	int deleteByUserId(int userid);
 }

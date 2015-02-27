@@ -9,6 +9,6 @@ public interface RegisterService{
 	UserWithBLOBs getUserByUserName(String username);
 	Shops getShopByShopName(String shopname);
 	List<Shops> getShopByUserName(String username);
-	void addShop(Shops shop);
+	void addShops(List<Shops> shops);
 	
 }

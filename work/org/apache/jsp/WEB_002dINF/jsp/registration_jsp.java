@@ -21,7 +21,8 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005felse;
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody;
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005ffielderror_005fnobody;
-  private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fid;
+  private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody;
+  private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid;
 
   private javax.el.ExpressionFactory _el_expressionfactory;
   private org.apache.AnnotationProcessor _jsp_annotationprocessor;
@@ -35,7 +36,8 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     _005fjspx_005ftagPool_005fs_005felse = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _005fjspx_005ftagPool_005fs_005ffielderror_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fid = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _el_expressionfactory = _jspxFactory.getJspApplicationContext(getServletConfig().getServletContext()).getExpressionFactory();
     _jsp_annotationprocessor = (org.apache.AnnotationProcessor) getServletConfig().getServletContext().getAttribute(org.apache.AnnotationProcessor.class.getName());
   }
@@ -45,7 +47,8 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     _005fjspx_005ftagPool_005fs_005felse.release();
     _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.release();
     _005fjspx_005ftagPool_005fs_005ffielderror_005fnobody.release();
-    _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fid.release();
+    _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody.release();
+    _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -121,14 +124,40 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\tfunction addShopInfo(){\r\n");
       out.write("\t\t\tvar divShopInfo=document.getElementById(\"divShopInfo\").cloneNode(true);\r\n");
       out.write("\t\t\tvar top=document.getElementById(\"divShopInfoAuto\");\r\n");
-      out.write("\t\t\tvar divShopInfoCnt=top.childNodes.length;\r\n");
-      out.write("\t\t\tdivShopInfo.id=\"divShopInfo-\"+(divShopInfoCnt-2);\r\n");
-      out.write("\t\t\ttop.appendChild(divShopInfo);\r\n");
+      out.write("\t\t\t//divShopInfo.id=\"divShopInfo-\"+divShopInfoCnt;\r\n");
+      out.write("\r\n");
+      out.write("\t\t\ttop.appendChild(divShopInfo);\t\t\t\r\n");
+      out.write("\t\t\tdivShopInfos=document.getElementsByName(\"divShopInfo\");\r\n");
+      out.write("\t\t\tdivShopInfoCnt=divShopInfos.length;\r\n");
+      out.write("\r\n");
+      out.write("\t\t\tfor (var k=0;k<divShopInfoCnt;k++)\r\n");
+      out.write("\t\t\t{\r\n");
+      out.write("\t\t\t\tvar shopInfoNode=divShopInfos.item(k);\r\n");
+      out.write("\t\t\t\tvar topNodeList=shopInfoNode.childNodes\r\n");
+      out.write("\t\t\t\tif(k>0){\r\n");
+      out.write("\t\t\t\t\tshopInfoNode.id=\"divShopInfo-\"+k;\r\n");
+      out.write("\t\t\t\t}\r\n");
+      out.write("\t\t\t\tfor(var i=0;i<topNodeList.length;i++){\r\n");
+      out.write("\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t\tif(topNodeList.item(i).tagName!=undefined && topNodeList.item(i).tagName==\"DIV\"){\r\n");
+      out.write("\t\t\t\t\t\tvar divNodeList=topNodeList.item(i).getElementsByTagName(\"INPUT\");\r\n");
+      out.write("\t\t\t\t\t\t//var divNodeList=topNodeList.item(i).childNodes;\r\n");
+      out.write("\t\t\t\t\t\tfor(var j=0;j<divNodeList.length;j++){\r\n");
+      out.write("\t\t\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t\t\t\tvar elementName=\"shops[\"+k+\"].\"+divNodeList.item(j).id;\r\n");
+      out.write("\t\t\t\t\t\t\tdivNodeList.item(j).name=elementName;\r\n");
+      out.write("\t\t\t\t\t\t}\r\n");
+      out.write("\t\t\t\t\t}\r\n");
+      out.write("\t\t\t\t}\r\n");
+      out.write("\t\t\t}\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("\t\t}\r\n");
       out.write("\r\n");
       out.write("\t\tfunction removeShopInfo(obj){\r\n");
       out.write("\t\t\tvar top=document.getElementById(\"divShopInfoAuto\");\r\n");
-      out.write("\t\t\tif(obj.id!=\"divShopInfo\"){\r\n");
+      out.write("\t\t\tvar div=document.getElementsByName(\"divShopInfo\");\r\n");
+      out.write("\t\t\tif(div.length>1){\r\n");
       out.write("\t\t\t\ttop.removeChild(obj);\r\n");
       out.write("\t\t\t}\t\t\t\r\n");
       out.write("\t\t}\r\n");
@@ -201,10 +230,10 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
         return;
       out.write("\" method=\"POST\"> \r\n");
       out.write("\t\t\t\t <div class=\"register-top-grid\">\r\n");
-      out.write("\t\t\t\t\t");
+      out.write("\t\t\t\t\t<font color=\"red\" size=\"3\">");
       if (_jspx_meth_s_005ffielderror_005f0(_jspx_page_context))
         return;
-      out.write("\r\n");
+      out.write("</font>\r\n");
       out.write("\t\t\t\t\t<h3>个人信息</h3>\r\n");
       out.write("\t\t\t\t\t <div class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\">\r\n");
       out.write("\t\t\t\t\t\t<span>手机/邮箱<label>*</label></span>\r\n");
@@ -212,6 +241,10 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       if (_jspx_meth_s_005fproperty_005f1(_jspx_page_context))
         return;
       out.write("\"/> \r\n");
+      out.write("\t\t\t\t\t\t");
+      if (_jspx_meth_s_005fhidden_005f0(_jspx_page_context))
+        return;
+      out.write("\r\n");
       out.write("\t\t\t\t\t </div>\r\n");
       out.write("\t\t\t\t\t <div class=\"wow fadeInRight\" data-wow-delay=\"0.4s\">\r\n");
       out.write("\t\t\t\t\t\t<span>QQ名<label>*</label></span>\r\n");
@@ -253,35 +286,35 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t\t\t\t\t <div class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\">\r\n");
       out.write("\t\t\t\t\t\t\t<span>身份证号码</span>\r\n");
       out.write("\t\t\t\t\t\t\t<input type=\"text\" name=\"userWithBLOBs.identityid\" value=\"");
-      if (_jspx_meth_s_005fproperty_005f7(_jspx_page_context))
+      if (_jspx_meth_s_005fproperty_005f12(_jspx_page_context))
         return;
       out.write("\"/> \r\n");
       out.write("\t\t\t\t\t\t </div>\r\n");
       out.write("\t\t\t\t\t\t <div class=\"wow fadeInRight\" data-wow-delay=\"0.4s\">\r\n");
       out.write("\t\t\t\t\t\t\t<span>QQ号码</span>\r\n");
       out.write("\t\t\t\t\t\t\t<input type=\"text\"  name=\"userWithBLOBs.qqnumber\" value=\"");
-      if (_jspx_meth_s_005fproperty_005f8(_jspx_page_context))
+      if (_jspx_meth_s_005fproperty_005f13(_jspx_page_context))
         return;
       out.write("\"/>\r\n");
       out.write("\t\t\t\t\t\t </div>\r\n");
       out.write("\t\t\t\t\t\t <div class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\">\r\n");
       out.write("\t\t\t\t\t\t\t<span>职业</span>\r\n");
       out.write("\t\t\t\t\t\t\t<input type=\"text\" name=\"userWithBLOBs.career\" value=\"");
-      if (_jspx_meth_s_005fproperty_005f9(_jspx_page_context))
+      if (_jspx_meth_s_005fproperty_005f14(_jspx_page_context))
         return;
       out.write("\"/> \r\n");
       out.write("\t\t\t\t\t\t </div>\r\n");
       out.write("\t\t\t\t\t\t <div class=\"wow fadeInRight\" data-wow-delay=\"0.4s\">\r\n");
       out.write("\t\t\t\t\t\t\t<span>年龄</span>\r\n");
       out.write("\t\t\t\t\t\t\t<input type=\"text\" name=\"userWithBLOBs.age\" value=\"");
-      if (_jspx_meth_s_005fproperty_005f10(_jspx_page_context))
+      if (_jspx_meth_s_005fproperty_005f15(_jspx_page_context))
         return;
       out.write("\"/>\r\n");
       out.write("\t\t\t\t\t\t </div>\t\t\r\n");
       out.write("\t\t\t\t\t\t <div class=\"wow fadeInRight\" data-wow-delay=\"0.4s\">\r\n");
       out.write("\t\t\t\t\t\t\t<span>备注</span>\r\n");
       out.write("\t\t\t\t\t\t\t<input type=\"text\" name=\"userWithBLOBs.note\" value=\"");
-      if (_jspx_meth_s_005fproperty_005f11(_jspx_page_context))
+      if (_jspx_meth_s_005fproperty_005f16(_jspx_page_context))
         return;
       out.write("\"/>\r\n");
       out.write("\t\t\t\t\t\t </div>\t\t\t\t\t\t\t \r\n");
@@ -436,7 +469,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.IfTag _jspx_th_s_005fif_005f1 = (org.apache.struts2.views.jsp.IfTag) _005fjspx_005ftagPool_005fs_005fif_0026_005ftest.get(org.apache.struts2.views.jsp.IfTag.class);
     _jspx_th_s_005fif_005f1.setPageContext(_jspx_page_context);
     _jspx_th_s_005fif_005f1.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(74,21) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(100,21) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fif_005f1.setTest("#session.username==null||#session.username.isEmpty()");
     int _jspx_eval_s_005fif_005f1 = _jspx_th_s_005fif_005f1.doStartTag();
     if (_jspx_eval_s_005fif_005f1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -521,7 +554,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f1 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f1.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f1.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(80,62) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(106,62) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f1.setValue("#request.userWithBLOBs.username");
     int _jspx_eval_s_005fproperty_005f1 = _jspx_th_s_005fproperty_005f1.doStartTag();
     if (_jspx_th_s_005fproperty_005f1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -529,6 +562,27 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       return true;
     }
     _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f1);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_005fhidden_005f0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:hidden
+    org.apache.struts2.views.jsp.ui.HiddenTag _jspx_th_s_005fhidden_005f0 = (org.apache.struts2.views.jsp.ui.HiddenTag) _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody.get(org.apache.struts2.views.jsp.ui.HiddenTag.class);
+    _jspx_th_s_005fhidden_005f0.setPageContext(_jspx_page_context);
+    _jspx_th_s_005fhidden_005f0.setParent(null);
+    // /WEB-INF/jsp/registration.jsp(107,6) name = theme type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fhidden_005f0.setTheme("simple");
+    // /WEB-INF/jsp/registration.jsp(107,6) name = name type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fhidden_005f0.setName("userWithBLOBs.userid");
+    int _jspx_eval_s_005fhidden_005f0 = _jspx_th_s_005fhidden_005f0.doStartTag();
+    if (_jspx_th_s_005fhidden_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody.reuse(_jspx_th_s_005fhidden_005f0);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody.reuse(_jspx_th_s_005fhidden_005f0);
     return false;
   }
 
@@ -540,7 +594,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f2 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f2.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f2.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(84,66) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(111,66) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f2.setValue("#request.userWithBLOBs.displayname");
     int _jspx_eval_s_005fproperty_005f2 = _jspx_th_s_005fproperty_005f2.doStartTag();
     if (_jspx_th_s_005fproperty_005f2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -559,7 +613,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f3 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f3.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f3.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(88,62) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(115,62) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f3.setValue("#request.userWithBLOBs.password");
     int _jspx_eval_s_005fproperty_005f3 = _jspx_th_s_005fproperty_005f3.doStartTag();
     if (_jspx_th_s_005fproperty_005f3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -575,13 +629,15 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:iterator
-    org.apache.struts2.views.jsp.IteratorTag _jspx_th_s_005fiterator_005f0 = (org.apache.struts2.views.jsp.IteratorTag) _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fid.get(org.apache.struts2.views.jsp.IteratorTag.class);
+    org.apache.struts2.views.jsp.IteratorTag _jspx_th_s_005fiterator_005f0 = (org.apache.struts2.views.jsp.IteratorTag) _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid.get(org.apache.struts2.views.jsp.IteratorTag.class);
     _jspx_th_s_005fiterator_005f0.setPageContext(_jspx_page_context);
     _jspx_th_s_005fiterator_005f0.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(101,5) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(128,5) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fiterator_005f0.setValue("shops");
-    // /WEB-INF/jsp/registration.jsp(101,5) name = id type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fiterator_005f0.setId("shop");
+    // /WEB-INF/jsp/registration.jsp(128,5) name = id type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fiterator_005f0.setId("sp");
+    // /WEB-INF/jsp/registration.jsp(128,5) name = status type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fiterator_005f0.setStatus("u");
     int _jspx_eval_s_005fiterator_005f0 = _jspx_th_s_005fiterator_005f0.doStartTag();
     if (_jspx_eval_s_005fiterator_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       if (_jspx_eval_s_005fiterator_005f0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
@@ -591,37 +647,45 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       }
       do {
         out.write(" \r\n");
-        out.write("\t\t\t\t\t\t <div class=\"register-bottom-grid\" id=\"divShopInfo\" style=\"display: none\">\r\n");
+        out.write("\t\t\t\t\t\t <div class=\"register-bottom-grid\" id=\"divShopInfo\" name=\"divShopInfo\">\r\n");
         out.write("\t\t\t\t\t\t\t <span>增加商铺<input type=\"button\" value=\"+\" onclick=\"addShopInfo();\"/>&nbsp&nbsp删除商铺<input type=\"button\" value=\"-\" onclick=\"removeShopInfo(this.parentNode.parentNode);\"/></span>\r\n");
-        out.write("\t\t\t\t\t\t\t\t <div class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\">\r\n");
+        out.write("\t\t\t\t\t\t\t\t <div class=\"wow fadeInLeft\" name=\"divShopName\" data-wow-delay=\"0.4s\">\r\n");
         out.write("\t\t\t\t\t\t\t\t\t<span>商铺号<label>*</label></span>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"shop.shopname\"  value=\"");
+        out.write("\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"shops[");
         if (_jspx_meth_s_005fproperty_005f4(_jspx_th_s_005fiterator_005f0, _jspx_page_context))
           return true;
-        out.write("\" onfocus=\"this.value = '';\" onblur=\"if (this.value == '') {this.value = '格式：x-x-x';}\"> \r\n");
-        out.write("\t\t\t\t\t\t\t\t </div>\r\n");
-        out.write("\t\t\t\t\t\t\t\t <div class=\"wow fadeInRight\" data-wow-delay=\"0.4s\">\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t<span>商铺类型<label>*</label></span>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t<div>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t\t<table>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t\t\t<tr>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t\t\t\t<td>经营权<input type=\"radio\" name=\"shop.shoptype\" value=\"经营权\"/></td>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t\t\t\t<td>产权<input type=\"radio\" name=\"shop.shoptype\" value=\"产权\"/></td>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t\t\t</tr>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t\t</table>\t\t\t\t\t\t\t\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t</div>\r\n");
-        out.write("\t\t\t\t\t\t\t\t </div>\r\n");
-        out.write("\t\t\t\t\t\t\t\t <div class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\">\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t<span>商铺面积<label>*</label></span>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"shop.shopsquare1\" value=\"");
+        out.write("].shopname\" id=\"shopname\" value=\"");
         if (_jspx_meth_s_005fproperty_005f5(_jspx_th_s_005fiterator_005f0, _jspx_page_context))
+          return true;
+        out.write("\" onblur=\"if (this.value == '') {this.value = '格式：x-x-x';}\"> \r\n");
+        out.write("\t\t\t\t\t\t\t\t </div>\r\n");
+        out.write("\t\t\t\t\t\t\t\t <div class=\"wow fadeInRight\" name=\"divShopType\" data-wow-delay=\"0.4s\">\r\n");
+        out.write("\t\t\t\t\t\t\t\t\t<span>商铺类型<label>*</label></span>\r\n");
+        out.write("\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"shops[");
+        if (_jspx_meth_s_005fproperty_005f6(_jspx_th_s_005fiterator_005f0, _jspx_page_context))
+          return true;
+        out.write("].shoptype\" id=\"shoptype\" value=\"");
+        if (_jspx_meth_s_005fproperty_005f7(_jspx_th_s_005fiterator_005f0, _jspx_page_context))
+          return true;
+        out.write("\" onfocus=\"this.value = '';\" onblur=\"if (this.value == '') {this.value = '经营权或产权';}\"> \r\n");
+        out.write("\t\t\t\t\t\t\t\t </div>\r\n");
+        out.write("\t\t\t\t\t\t\t\t <div class=\"wow fadeInLeft\" name=\"divShopSquare\" data-wow-delay=\"0.4s\">\r\n");
+        out.write("\t\t\t\t\t\t\t\t\t<span>商铺面积<label>*</label></span>\r\n");
+        out.write("\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"shops[");
+        if (_jspx_meth_s_005fproperty_005f8(_jspx_th_s_005fiterator_005f0, _jspx_page_context))
+          return true;
+        out.write("].shopsquare\" id=\"shopsquare\" value=\"");
+        if (_jspx_meth_s_005fproperty_005f9(_jspx_th_s_005fiterator_005f0, _jspx_page_context))
           return true;
         out.write("\"/> \r\n");
         out.write("\t\t\t\t\t\t\t\t </div>\r\n");
-        out.write("\t\t\t\t\t\t\t\t <div class=\"wow fadeInRight\" data-wow-delay=\"0.4s\">\r\n");
+        out.write("\t\t\t\t\t\t\t\t <div class=\"wow fadeInRight\" name=\"divShopAmount\" data-wow-delay=\"0.4s\">\r\n");
         out.write("\t\t\t\t\t\t\t\t\t<span>商铺总价<label>*</label></span>\r\n");
-        out.write("\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"shop.shopamount2\" value=\"");
-        if (_jspx_meth_s_005fproperty_005f6(_jspx_th_s_005fiterator_005f0, _jspx_page_context))
+        out.write("\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"shops[");
+        if (_jspx_meth_s_005fproperty_005f10(_jspx_th_s_005fiterator_005f0, _jspx_page_context))
+          return true;
+        out.write("].shopamount\" id=\"shopamount\" value=\"");
+        if (_jspx_meth_s_005fproperty_005f11(_jspx_th_s_005fiterator_005f0, _jspx_page_context))
           return true;
         out.write("\"/>\r\n");
         out.write("\t\t\t\t\t\t\t\t </div>\r\n");
@@ -636,10 +700,10 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       }
     }
     if (_jspx_th_s_005fiterator_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fid.reuse(_jspx_th_s_005fiterator_005f0);
+      _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid.reuse(_jspx_th_s_005fiterator_005f0);
       return true;
     }
-    _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fid.reuse(_jspx_th_s_005fiterator_005f0);
+    _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid.reuse(_jspx_th_s_005fiterator_005f0);
     return false;
   }
 
@@ -651,8 +715,8 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f4 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f4.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f4.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(106,57) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f4.setValue("#shop.shopname");
+    // /WEB-INF/jsp/registration.jsp(133,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f4.setValue("#u.index");
     int _jspx_eval_s_005fproperty_005f4 = _jspx_th_s_005fproperty_005f4.doStartTag();
     if (_jspx_th_s_005fproperty_005f4.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f4);
@@ -670,8 +734,8 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f5 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f5.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f5.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(121,59) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f5.setValue("#shop.shopsquare");
+    // /WEB-INF/jsp/registration.jsp(133,103) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f5.setValue("#sp.shopname");
     int _jspx_eval_s_005fproperty_005f5 = _jspx_th_s_005fproperty_005f5.doStartTag();
     if (_jspx_th_s_005fproperty_005f5.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f5);
@@ -689,8 +753,8 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f6 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f6.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f6.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(125,59) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f6.setValue("#shop.shopamount");
+    // /WEB-INF/jsp/registration.jsp(137,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f6.setValue("#u.index");
     int _jspx_eval_s_005fproperty_005f6 = _jspx_th_s_005fproperty_005f6.doStartTag();
     if (_jspx_th_s_005fproperty_005f6.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f6);
@@ -700,16 +764,16 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     return false;
   }
 
-  private boolean _jspx_meth_s_005fproperty_005f7(PageContext _jspx_page_context)
+  private boolean _jspx_meth_s_005fproperty_005f7(javax.servlet.jsp.tagext.JspTag _jspx_th_s_005fiterator_005f0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:property
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f7 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f7.setPageContext(_jspx_page_context);
-    _jspx_th_s_005fproperty_005f7.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(139,65) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f7.setValue("#request.userWithBLOBs.identityid");
+    _jspx_th_s_005fproperty_005f7.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
+    // /WEB-INF/jsp/registration.jsp(137,103) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f7.setValue("#sp.shoptype");
     int _jspx_eval_s_005fproperty_005f7 = _jspx_th_s_005fproperty_005f7.doStartTag();
     if (_jspx_th_s_005fproperty_005f7.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f7);
@@ -719,16 +783,16 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     return false;
   }
 
-  private boolean _jspx_meth_s_005fproperty_005f8(PageContext _jspx_page_context)
+  private boolean _jspx_meth_s_005fproperty_005f8(javax.servlet.jsp.tagext.JspTag _jspx_th_s_005fiterator_005f0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:property
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f8 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f8.setPageContext(_jspx_page_context);
-    _jspx_th_s_005fproperty_005f8.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(143,64) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f8.setValue("#request.userWithBLOBs.qqnumber");
+    _jspx_th_s_005fproperty_005f8.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
+    // /WEB-INF/jsp/registration.jsp(141,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f8.setValue("#u.index");
     int _jspx_eval_s_005fproperty_005f8 = _jspx_th_s_005fproperty_005f8.doStartTag();
     if (_jspx_th_s_005fproperty_005f8.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f8);
@@ -738,16 +802,16 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     return false;
   }
 
-  private boolean _jspx_meth_s_005fproperty_005f9(PageContext _jspx_page_context)
+  private boolean _jspx_meth_s_005fproperty_005f9(javax.servlet.jsp.tagext.JspTag _jspx_th_s_005fiterator_005f0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:property
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f9 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f9.setPageContext(_jspx_page_context);
-    _jspx_th_s_005fproperty_005f9.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(147,61) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f9.setValue("#request.userWithBLOBs.career");
+    _jspx_th_s_005fproperty_005f9.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
+    // /WEB-INF/jsp/registration.jsp(141,107) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f9.setValue("#sp.shopsquare");
     int _jspx_eval_s_005fproperty_005f9 = _jspx_th_s_005fproperty_005f9.doStartTag();
     if (_jspx_th_s_005fproperty_005f9.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f9);
@@ -757,16 +821,16 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     return false;
   }
 
-  private boolean _jspx_meth_s_005fproperty_005f10(PageContext _jspx_page_context)
+  private boolean _jspx_meth_s_005fproperty_005f10(javax.servlet.jsp.tagext.JspTag _jspx_th_s_005fiterator_005f0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:property
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f10 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f10.setPageContext(_jspx_page_context);
-    _jspx_th_s_005fproperty_005f10.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(151,58) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f10.setValue("#request.userWithBLOBs.age");
+    _jspx_th_s_005fproperty_005f10.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
+    // /WEB-INF/jsp/registration.jsp(145,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f10.setValue("#u.index");
     int _jspx_eval_s_005fproperty_005f10 = _jspx_th_s_005fproperty_005f10.doStartTag();
     if (_jspx_th_s_005fproperty_005f10.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f10);
@@ -776,22 +840,117 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     return false;
   }
 
-  private boolean _jspx_meth_s_005fproperty_005f11(PageContext _jspx_page_context)
+  private boolean _jspx_meth_s_005fproperty_005f11(javax.servlet.jsp.tagext.JspTag _jspx_th_s_005fiterator_005f0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:property
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f11 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f11.setPageContext(_jspx_page_context);
-    _jspx_th_s_005fproperty_005f11.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(155,59) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f11.setValue("#request.userWithBLOBs.note");
+    _jspx_th_s_005fproperty_005f11.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
+    // /WEB-INF/jsp/registration.jsp(145,107) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f11.setValue("#sp.shopamount");
     int _jspx_eval_s_005fproperty_005f11 = _jspx_th_s_005fproperty_005f11.doStartTag();
     if (_jspx_th_s_005fproperty_005f11.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f11);
       return true;
     }
     _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f11);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_005fproperty_005f12(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:property
+    org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f12 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
+    _jspx_th_s_005fproperty_005f12.setPageContext(_jspx_page_context);
+    _jspx_th_s_005fproperty_005f12.setParent(null);
+    // /WEB-INF/jsp/registration.jsp(159,65) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f12.setValue("#request.userWithBLOBs.identityid");
+    int _jspx_eval_s_005fproperty_005f12 = _jspx_th_s_005fproperty_005f12.doStartTag();
+    if (_jspx_th_s_005fproperty_005f12.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f12);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f12);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_005fproperty_005f13(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:property
+    org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f13 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
+    _jspx_th_s_005fproperty_005f13.setPageContext(_jspx_page_context);
+    _jspx_th_s_005fproperty_005f13.setParent(null);
+    // /WEB-INF/jsp/registration.jsp(163,64) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f13.setValue("#request.userWithBLOBs.qqnumber");
+    int _jspx_eval_s_005fproperty_005f13 = _jspx_th_s_005fproperty_005f13.doStartTag();
+    if (_jspx_th_s_005fproperty_005f13.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f13);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f13);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_005fproperty_005f14(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:property
+    org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f14 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
+    _jspx_th_s_005fproperty_005f14.setPageContext(_jspx_page_context);
+    _jspx_th_s_005fproperty_005f14.setParent(null);
+    // /WEB-INF/jsp/registration.jsp(167,61) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f14.setValue("#request.userWithBLOBs.career");
+    int _jspx_eval_s_005fproperty_005f14 = _jspx_th_s_005fproperty_005f14.doStartTag();
+    if (_jspx_th_s_005fproperty_005f14.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f14);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f14);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_005fproperty_005f15(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:property
+    org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f15 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
+    _jspx_th_s_005fproperty_005f15.setPageContext(_jspx_page_context);
+    _jspx_th_s_005fproperty_005f15.setParent(null);
+    // /WEB-INF/jsp/registration.jsp(171,58) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f15.setValue("#request.userWithBLOBs.age");
+    int _jspx_eval_s_005fproperty_005f15 = _jspx_th_s_005fproperty_005f15.doStartTag();
+    if (_jspx_th_s_005fproperty_005f15.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f15);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f15);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_005fproperty_005f16(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:property
+    org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f16 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
+    _jspx_th_s_005fproperty_005f16.setPageContext(_jspx_page_context);
+    _jspx_th_s_005fproperty_005f16.setParent(null);
+    // /WEB-INF/jsp/registration.jsp(175,59) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f16.setValue("#request.userWithBLOBs.note");
+    int _jspx_eval_s_005fproperty_005f16 = _jspx_th_s_005fproperty_005f16.doStartTag();
+    if (_jspx_th_s_005fproperty_005f16.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f16);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f16);
     return false;
   }
 
@@ -803,7 +962,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.IfTag _jspx_th_s_005fif_005f2 = (org.apache.struts2.views.jsp.IfTag) _005fjspx_005ftagPool_005fs_005fif_0026_005ftest.get(org.apache.struts2.views.jsp.IfTag.class);
     _jspx_th_s_005fif_005f2.setPageContext(_jspx_page_context);
     _jspx_th_s_005fif_005f2.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(161,35) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(181,35) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fif_005f2.setTest("#session.username==null||#session.username.isEmpty()");
     int _jspx_eval_s_005fif_005f2 = _jspx_th_s_005fif_005f2.doStartTag();
     if (_jspx_eval_s_005fif_005f2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {

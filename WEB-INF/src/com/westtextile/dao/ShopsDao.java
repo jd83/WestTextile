@@ -8,4 +8,5 @@ public interface ShopsDao {
 	Shops getShopByShopName(String shopname);
 	List<Shops> getShopByUserId(int userid);
 	int deleteShopByShopName(String shopname);
+	int deleteShopByUserId(int userid);
 }

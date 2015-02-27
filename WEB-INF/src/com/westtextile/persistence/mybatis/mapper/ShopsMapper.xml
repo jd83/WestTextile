@@ -64,6 +64,10 @@
     delete from shops
     where shopname = #{shopname,jdbcType=VARCHAR}
   </delete>  
+  <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    delete from shops
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>    
   <insert id="insert" parameterType="com.westtextile.persistence.mybatis.model.Shops">
     <!--
       WARNING - @mbggenerated

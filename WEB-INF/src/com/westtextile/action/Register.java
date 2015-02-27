@@ -69,6 +69,7 @@ public class Register extends ActionSupport {
     		userWithBLOBs=registerService.getUserByUserName(loginUsername);
     		shops=registerService.getShopByUserName(loginUsername);
     		this.setUserWithBLOBs(userWithBLOBs);
+    		this.setShops(shops);
     	}
 		if(shops==null||shops.size()==0){
 			shops=new ArrayList<Shops>();
@@ -99,7 +100,7 @@ public class Register extends ActionSupport {
 			registerService.addUser(userWithBLOBs);
 
 			// insert shop
-			registerService.addShop(shop);
+			registerService.addShops(shops);
 			result = SUCCESS;
 		}
 		return result;
@@ -117,10 +118,16 @@ public class Register extends ActionSupport {
 		if(!this.hasErrors()){
 			registerService.updateUser(userWithBLOBs);
 			//insert shop
-			registerService.addShop(shop);
+			for (Shops sp : shops) {
+				if(sp!=null){
+					sp.setUserid(userWithBLOBs.getUserid());
+				}else {
+					shops.remove(sp);
+				}
+			}	
+			registerService.addShops(shops);
 			result=SUCCESS;
 		}	
-		refresh();
 		return result;			
 	}
 	
@@ -129,10 +136,25 @@ public class Register extends ActionSupport {
 		if(!repassword.equals(userWithBLOBs.getPassword())){
 			this.addFieldError("repassword", "两次密码必须一致！");
 		}
-		//check shop type
-		if(!shop.getShopname().isEmpty()&&shop.getShoptype()==null){
-			this.addFieldError("shop.shoptype", "必须选择商铺类型！");
+		
+		for (int i=0;i<shops.size();i++) {
+			if(shops.get(i)!=null)
+			{
+				//check shop name format
+				if(shops.get(i).getShopname().split("-").length!=3){
+					this.addFieldError("shops["+i+"].shoptype", "商铺号格式为x-x-x，如1-1-1.");
+				}
+				//check shop type
+				if(!shops.get(i).getShopname().isEmpty()&&shops.get(i).getShoptype()==null){
+					this.addFieldError("shops["+i+"].shoptype", "必须选择商铺类型！");
+				}
+			}else {
+				shops.remove(i);
+			}
+
 		}
+
+
 	}
 	
 
