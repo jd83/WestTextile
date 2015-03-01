@@ -30,9 +30,7 @@ import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
-import com.westtextile.service.LoginService;
-import com.westtextile.service.impl.LoginServiceImpl;
+import com.westtextile.persistence.mybatis.model.User;
 import com.westtextile.dao.UserDao;
 import com.westtextile.dao.impl.UserDaoImpl;
 
@@ -45,7 +43,7 @@ public class Login extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 5116793257658151173L;
-	private UserWithBLOBs userWithBLOBs;
+	protected User user;
 
 
 
@@ -55,27 +53,23 @@ public class Login extends ActionSupport {
 	}
 	
 	@Validations(requiredStrings={
-	        @RequiredStringValidator(fieldName="userWithBLOBs.username",message="用户名不能为空！"),
-	        @RequiredStringValidator(fieldName="userWithBLOBs.password",message="密码不能为空！")
+	        @RequiredStringValidator(fieldName="user.username",message="用户名不能为空！"),
+	        @RequiredStringValidator(fieldName="user.password",message="密码不能为空！")
 	    }
 	)
 	public String loginUser() throws Exception {
-		String result;
-		String username = new String(userWithBLOBs.getUsername().getBytes(
+		String result=INPUT;
+		String username = new String(user.getUsername().getBytes(
 				"ISO-8859-1"), "gb2312");
-		userWithBLOBs.setUsername(username);
+		user.setUsername(username);
 		
 		//check password and user
-		LoginService service=new LoginServiceImpl();
-		boolean isCorrect=service.checkLoginInfo(username, userWithBLOBs.getPassword());
+		loginCheck();
 		
-		if(isCorrect){
+		if(!this.hasFieldErrors()){
 			Map map=ActionContext.getContext().getSession();
-			map.put("username", userWithBLOBs.getUsername());
+			map.put("username", user.getUsername());
 			result= SUCCESS;
-		}else {
-			this.addFieldError("userWithBLOBs.username", "密码错误，请重新输入！");
-			result= INPUT;
 		}
 		return result;
 	}
@@ -87,12 +81,28 @@ public class Login extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public UserWithBLOBs getUserWithBLOBs() {
-		return userWithBLOBs;
+	
+	public void loginCheck() {
+		UserDao userDao=new UserDaoImpl();
+		User userDb=userDao.getUserByUserName(user.getUsername());
+
+		//username not exist
+		if(userDb==null){
+			this.addFieldError("user.username", "该手机/邮箱未注册！");
+	
+		}
+		//password check
+		else if(!userDb.getPassword().equals(user.getPassword())){
+			super.addFieldError("user.password", "密码错误！");
+		}
 	}
 
-	public void setUserWithBLOBs(UserWithBLOBs userWithBLOBs) {
-		this.userWithBLOBs = userWithBLOBs;
+	public User getUser() {
+		return user;
 	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 }

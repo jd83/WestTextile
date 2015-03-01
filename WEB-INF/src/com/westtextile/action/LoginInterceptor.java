@@ -22,6 +22,7 @@ public class LoginInterceptor extends AbstractInterceptor {
 				&& !invocation.getAction().getClass().getName().endsWith("Logout")
 				&& !invocation.getAction().getClass().getName().endsWith("Register_Forward")
 				&& !invocation.getAction().getClass().getName().endsWith("Register")
+				&& !invocation.getAction().getClass().getName().endsWith("Upload")
 				&& (sessionMap.get("username") == null) ) {
 				return Action.LOGIN;
 		} else {

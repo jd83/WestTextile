@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=gb2312" %>
+<%@ page pageEncoding="gb2312" contentType="text/html;charset=utf-8" %>
 	<div class="header">
   	    <div class="container">
 			<div class="header-top">

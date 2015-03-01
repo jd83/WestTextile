@@ -1,8 +1,8 @@
 package com.westtextile.dao;
-import com.westtextile.persistence.mybatis.model.UserWithBLOBs;
+import com.westtextile.persistence.mybatis.model.User;
 public interface UserDao {	
-	UserWithBLOBs getUserByUserId(int userId);
-	UserWithBLOBs getUserByUserName(String username);
-	int updateByUserName(UserWithBLOBs user);
-	void insertUser(UserWithBLOBs user);
+	User getUserByUserId(int userId);
+	User getUserByUserName(String username);
+	int updateByUserName(User user);
+	void insertUser(User user);
 }

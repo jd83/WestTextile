@@ -60,7 +60,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 
 
     try {
-      response.setContentType("text/html;charset=gb2312");
+      response.setContentType("text/html;charset=utf-8");
       pageContext = _jspxFactory.getPageContext(this, request, response,
       			null, true, 8192, true);
       _jspx_page_context = pageContext;
@@ -178,7 +178,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         return;
       out.write("\r\n");
       out.write("\t\t\t\t\t\t\t\t\t\t<span>手机/邮箱<label>*</label></span>\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"userWithBLOBs.username\" value=\"");
+      out.write("\t\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"user.username\" value=\"");
       if (_jspx_meth_s_005fproperty_005f1(_jspx_page_context))
         return;
       out.write("\" size=\"50%\"/> \r\n");
@@ -187,7 +187,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t  \t  \t<tr><td>\r\n");
       out.write("\t\t\t\t\t\t\t\t\t <div class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\">\r\n");
       out.write("\t\t\t\t\t\t\t\t\t\t<span>密码<label>*</label></span>\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"userWithBLOBs.password\" value=\"");
+      out.write("\t\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"user.password\" value=\"");
       if (_jspx_meth_s_005fproperty_005f2(_jspx_page_context))
         return;
       out.write("\" size=\"50%\"/>\r\n");
@@ -372,8 +372,8 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f1 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f1.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f1.setParent(null);
-    // /WEB-INF/jsp/login.jsp(57,66) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f1.setValue("#request.userWithBLOBs.username");
+    // /WEB-INF/jsp/login.jsp(57,57) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f1.setValue("#request.user.username");
     int _jspx_eval_s_005fproperty_005f1 = _jspx_th_s_005fproperty_005f1.doStartTag();
     if (_jspx_th_s_005fproperty_005f1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f1);
@@ -391,8 +391,8 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f2 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f2.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f2.setParent(null);
-    // /WEB-INF/jsp/login.jsp(63,66) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_s_005fproperty_005f2.setValue("#request.userWithBLOBs.password");
+    // /WEB-INF/jsp/login.jsp(63,57) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_s_005fproperty_005f2.setValue("#request.user.password");
     int _jspx_eval_s_005fproperty_005f2 = _jspx_th_s_005fproperty_005f2.doStartTag();
     if (_jspx_th_s_005fproperty_005f2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.reuse(_jspx_th_s_005fproperty_005f2);

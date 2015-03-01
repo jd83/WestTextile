@@ -29,6 +29,7 @@ table caption{
 table td{
 	color: #fbb034;
 }
+
 .header{
 	background:#fff;
 	padding:1em 0em;
@@ -1074,9 +1075,9 @@ div#portfoliolist {
 	font-family:Î¢ÈíÑÅºÚ
 }
 .register-top-grid div, .register-bottom-grid div {
-	width: 48%;
+	width: 40%;
 	float: left;
-	margin: 10px 0;
+
 }
 .register-top-grid span, .register-bottom-grid span {
 	color:#555;
@@ -1086,13 +1087,14 @@ div#portfoliolist {
 	text-transform: uppercase;
 	font-family:Î¢ÈíÑÅºÚ
 }
-.register-top-grid input[type="text"], .register-bottom-grid input[type="text"] {
+.register-top-grid input[type="text"], .register-bottom-grid input[type="text"], .register-top-grid input[type="password"], .register-bottom-grid input[type="password"]{
 	border: 1px solid #EEE;
 	outline-color:#FF5B36;
-	width: 96%;
+	width: 80%;
 	font-size: 1em;
 	padding: 0.5em;
 }
+
 .checkbox {
 	margin-bottom: 4px;
 	padding-left: 27px;
@@ -1198,7 +1200,7 @@ div.register-bottom-grid {
 }
 
 .container table[name="logintb"] {
-	background:#fbb034;
+	background:#fff;
 	filter:Alpha(opacity=60);
 	box-shadow:10px 10px 20px rgba(0,0,0,0.5);}
 	-moz-opacity:0.8;

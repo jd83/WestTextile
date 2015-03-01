@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=gb2312" %>
+<%@ page contentType="text/html;charset=utf-8" %>
 	<div class="header">
   	    <div class="container">
 			<div class="header-top">
@@ -12,7 +12,7 @@
 							<li class="active"><a href="Login_Forward">µÇÂ¼</a></li>
 						</s:if>
 						<s:else>
-							<li class="active"><a href="#"><s:property value="#session.username"/></a></li>
+							<li class="active"><a href="Register_Forward"><s:property value="#session.username"/></a></li>
 							<li><a href="Logout">ÍË³ö</a></li>
 						</s:else>
 					</ul>

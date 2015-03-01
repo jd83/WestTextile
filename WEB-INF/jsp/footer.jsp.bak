@@ -1,4 +1,4 @@
-<%@ page pageEncoding="gb2312" contentType="text/html;charset=utf-8"%>
+<%@ page pageEncoding="gb2312" contentType="text/html;charset=gb2312"%>
 <!-- footer -->
 	<div class="footer" style="background-color:#7CCD7C">
 		<div class="container">

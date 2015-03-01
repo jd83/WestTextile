@@ -1,5 +1,5 @@
 <%@page import="org.apache.struts2.components.Include"%>
-<%@ page contentType="text/html;charset=gb2312" %>
+<%@ page pageEncoding="gb2312" contentType="text/html;charset=utf-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -54,13 +54,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									 <div class="wow fadeInLeft" data-wow-delay="0.4s" >
 										<s:fielderror></s:fielderror>
 										<span> ÷ª˙/” œ‰<label>*</label></span>
-										<input type="text" name="userWithBLOBs.username" value="<s:property value='#request.userWithBLOBs.username'/>" size="50%"/> 
+										<input type="text" name="user.username" value="<s:property value='#request.user.username'/>" size="50%"/> 
 									 </div>					  	  	
 						  	  	</td></tr>
 						  	  	<tr><td>
 									 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 										<span>√‹¬Î<label>*</label></span>
-										<input type="text" name="userWithBLOBs.password" value="<s:property value='#request.userWithBLOBs.password'/>" size="50%"/>
+										<input type="text" name="user.password" value="<s:property value='#request.user.password'/>" size="50%"/>
 									 </div>				  	  	
 						  	  	</td></tr>				  	  	
 					  	  	</table>

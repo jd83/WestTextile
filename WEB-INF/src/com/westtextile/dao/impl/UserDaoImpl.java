@@ -10,21 +10,21 @@ import com.westtextile.dao.UserDao;
 public class UserDaoImpl extends MySqlSessionDaoSupport implements UserDao{	
 	
 
-	public UserWithBLOBs getUserByUserId(int userId){
+	public User getUserByUserId(int userId){
 		
         SqlSession session =this.getSqlSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
         return userMapper.selectByPrimaryKey(userId);
 	}
 	
-	public UserWithBLOBs getUserByUserName(String username){
+	public User getUserByUserName(String username){
 		
         SqlSession session =this.getSqlSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
         return userMapper.selectByUserName(username);
 	}
 	
-	public void insertUser(UserWithBLOBs user){
+	public void insertUser(User user){
 		SqlSession session = this.getSqlSession();
 		UserMapper userMapper = session.getMapper(UserMapper.class);
 		userMapper.insert(user);
@@ -32,7 +32,7 @@ public class UserDaoImpl extends MySqlSessionDaoSupport implements UserDao{
 //		session.close();
 	}
 
-	public int updateByUserName(UserWithBLOBs user){
+	public int updateByUserName(User user){
 		SqlSession session = this.getSqlSession();
 		UserMapper userMapper = session.getMapper(UserMapper.class);
 		int result=userMapper.updateByUserNameWithBLOBs(user);

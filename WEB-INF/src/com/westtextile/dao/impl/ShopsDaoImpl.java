@@ -26,11 +26,11 @@ public class ShopsDaoImpl extends MySqlSessionDaoSupport implements ShopsDao{
 		return shop;
 	}
 	
-	public List<Shops> getShopByUserId(int userid){
+	public List<Shops> getShopByUserName(String username){
 		SqlSession session = this.getSqlSession();
 		ShopsMapper shopMapper = session.getMapper(ShopsMapper.class);
 		List<Shops> shop;
-		shop=shopMapper.selectByUserId(userid);
+		shop=shopMapper.selectByUserName(username);
 		return shop;
 	}
 	
@@ -43,11 +43,11 @@ public class ShopsDaoImpl extends MySqlSessionDaoSupport implements ShopsDao{
 		return result;
 	}
 	
-	public int deleteShopByUserId(int userid){
+	public int deleteShopByUserName(String username){
 		int result=0;
 		SqlSession session = this.getSqlSession();
 		ShopsMapper shopMapper = session.getMapper(ShopsMapper.class);
-		result=shopMapper.deleteByUserId(userid);
+		result=shopMapper.deleteByUserName(username);
 		return result;
 	}
 }
