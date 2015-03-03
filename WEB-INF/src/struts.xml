@@ -7,6 +7,8 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
+    <!-- 指定允许上传的文件最大字节数。默认值是2097152(2M)-->  
+    <constant name="struts.multipart.maxSize" value="20971520"/>  
         
 
     <package name="default" namespace="/" extends="struts-default">

@@ -11,7 +11,7 @@
         </action>
         <!-- Add actions here -->
         <action name="Upload" class="com.westtextile.action.FileUpload">
-        	<param name="savePath">/image</param>
+        	<param name="savePath">/upload</param>
         	<result name="input">/WEB-INF/jsp/registration.jsp</result>
             <result>/WEB-INF/jsp/registration.jsp</result>
         </action>            

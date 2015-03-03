@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class FileUpload extends ActionSupport{
@@ -22,15 +23,26 @@ public class FileUpload extends ActionSupport{
     @Override
     public String execute() throws Exception {
         ServletActionContext.getRequest().setCharacterEncoding("UTF-8");
+//        String absolutePath=ServletActionContext.getServletContext().getRealPath(""); 
         // 取得需要上传的文件数组
         List<File> files = getUpload();
         if (files != null && files.size() > 0) {
             for (int i = 0; i < files.size(); i++) {
-                FileOutputStream fos = new FileOutputStream(getSavePath() + "\\" + getUploadFileName().get(i));
+            	//if folder not exist, create
+            	String fileName=getSavePath() + "\\" + getUploadFileName().get(i);
+            	File uploadedFile=new File(fileName);
+            	if(!uploadedFile.getParentFile().exists()){
+            		uploadedFile.getParentFile().mkdirs();
+            	}
+            	if(uploadedFile.length()>2097152){
+            		this.addFieldError("upload", "上传文件大小不能超过2M！");
+            	}
+                FileOutputStream fos = new FileOutputStream(uploadedFile);
                 FileInputStream fis = new FileInputStream(files.get(i));
                 byte[] buffer = new byte[1024];
                 int len = 0;
                 while ((len = fis.read(buffer)) > 0) {
+                	
                     fos.write(buffer, 0, len);
                 }
                 fis.close();
@@ -43,12 +55,14 @@ public class FileUpload extends ActionSupport{
 
 
 	public String getSavePath() {
+		
 		return savePath;
 	}
 
 
 
 	public void setSavePath(String savePath) {
+		savePath=ServletActionContext.getServletContext().getRealPath(savePath); 
 		this.savePath = savePath;
 	}
 
