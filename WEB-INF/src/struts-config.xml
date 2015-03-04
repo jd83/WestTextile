@@ -11,7 +11,15 @@
         </action>
         <!-- Add actions here -->
         <action name="Upload" class="com.westtextile.action.FileUpload">
-        	<param name="savePath">/image</param>
+            <interceptor-ref name="fileUpload">  
+               <param name="allowedTypes">
+				      image/bmp,image/png,image/gif,image/jpeg,image/jpg,
+				      image/pjpeg ,image/bmp, image/gif, image/x-png, text/plain,
+				</param>
+
+            </interceptor-ref>     
+            <interceptor-ref name="defaultStack"></interceptor-ref>     
+            <param name="savePath">/upload</param>       	
         	<result name="input">/WEB-INF/jsp/registration.jsp</result>
             <result>/WEB-INF/jsp/registration.jsp</result>
         </action>            

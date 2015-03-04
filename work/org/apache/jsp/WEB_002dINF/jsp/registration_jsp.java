@@ -23,6 +23,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005ffielderror_005fnobody;
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody;
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid;
+  private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fs_005factionerror_005fnobody;
 
   private javax.el.ExpressionFactory _el_expressionfactory;
   private org.apache.AnnotationProcessor _jsp_annotationprocessor;
@@ -38,6 +39,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     _005fjspx_005ftagPool_005fs_005ffielderror_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _005fjspx_005ftagPool_005fs_005factionerror_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _el_expressionfactory = _jspxFactory.getJspApplicationContext(getServletConfig().getServletContext()).getExpressionFactory();
     _jsp_annotationprocessor = (org.apache.AnnotationProcessor) getServletConfig().getServletContext().getAttribute(org.apache.AnnotationProcessor.class.getName());
   }
@@ -49,6 +51,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     _005fjspx_005ftagPool_005fs_005ffielderror_005fnobody.release();
     _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody.release();
     _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid.release();
+    _005fjspx_005ftagPool_005fs_005factionerror_005fnobody.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -375,6 +378,10 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t\t\t <form action=\"Upload\" method=\"POST\" enctype=\"multipart/form-data\">\r\n");
       out.write("\t\t\t\t\t <div class=\"register-bottom-grid\">\r\n");
       out.write("\t\t\t\t\t\t<h3>上传附件</h3>\r\n");
+      out.write("\t\t\t\t\t\t");
+      if (_jspx_meth_s_005factionerror_005f0(_jspx_page_context))
+        return;
+      out.write("\r\n");
       out.write("\t\t\t\t\t\t <div class=\"wow fadeInRight\" data-wow-delay=\"0.4s\">\r\n");
       out.write("\t\t\t\t\t\t\t文件1:<input type=\"file\" name=\"upload\"><br/>\r\n");
       out.write("\t\t\t\t\t\t\t <input type=\"submit\" value=\"上传\"/>\r\n");
@@ -1382,6 +1389,23 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       return true;
     }
     _005fjspx_005ftagPool_005fs_005felse.reuse(_jspx_th_s_005felse_005f5);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_005factionerror_005f0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:actionerror
+    org.apache.struts2.views.jsp.ui.ActionErrorTag _jspx_th_s_005factionerror_005f0 = (org.apache.struts2.views.jsp.ui.ActionErrorTag) _005fjspx_005ftagPool_005fs_005factionerror_005fnobody.get(org.apache.struts2.views.jsp.ui.ActionErrorTag.class);
+    _jspx_th_s_005factionerror_005f0.setPageContext(_jspx_page_context);
+    _jspx_th_s_005factionerror_005f0.setParent(null);
+    int _jspx_eval_s_005factionerror_005f0 = _jspx_th_s_005factionerror_005f0.doStartTag();
+    if (_jspx_th_s_005factionerror_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fs_005factionerror_005fnobody.reuse(_jspx_th_s_005factionerror_005f0);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fs_005factionerror_005fnobody.reuse(_jspx_th_s_005factionerror_005f0);
     return false;
   }
 }

@@ -207,6 +207,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				 <form action="Upload" method="POST" enctype="multipart/form-data">
 					 <div class="register-bottom-grid">
 						<h3>上传附件</h3>
+						<s:actionerror></s:actionerror>
 						 <div class="wow fadeInRight" data-wow-delay="0.4s">
 							文件1:<input type="file" name="upload"><br/>
 							 <input type="submit" value="上传"/>

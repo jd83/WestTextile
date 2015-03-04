@@ -19,15 +19,35 @@ public class FileUpload extends ActionSupport{
 	private List<String> uploadContentType; // 文件类型
 	private String savePath;
 	
+	@Override
+	public void addActionError(String anErrorMessage){
+		 //判断是否是文件上传超过限制大小异常 
+		 if (anErrorMessage.startsWith("Request exceeded allowed size limit")) {  
+		 super.addActionError("你上传的文件大小不能超过3M！");  
+		   
+		 } else { 
+		 //如果不是文件上传大小异常则按原来的方法处理 
+		 super.addActionError(anErrorMessage);  
+		}  
+	}
+	
     @Override
     public String execute() throws Exception {
+
         ServletActionContext.getRequest().setCharacterEncoding("UTF-8");
         // 取得需要上传的文件数组
         List<File> files = getUpload();
         if (files != null && files.size() > 0) {
             for (int i = 0; i < files.size(); i++) {
-                FileOutputStream fos = new FileOutputStream(getSavePath() + "\\" + getUploadFileName().get(i));
+            	String fileName=getSavePath() + "\\" + getUploadFileName().get(i);
+            	//create parent folders
+            	File uploadedFile=new File(fileName);
+            	if(!uploadedFile.getParentFile().exists()){
+            		uploadedFile.getParentFile().mkdirs();
+            	}
+                FileOutputStream fos = new FileOutputStream(fileName);
                 FileInputStream fis = new FileInputStream(files.get(i));
+                
                 byte[] buffer = new byte[1024];
                 int len = 0;
                 while ((len = fis.read(buffer)) > 0) {
@@ -49,6 +69,7 @@ public class FileUpload extends ActionSupport{
 
 
 	public void setSavePath(String savePath) {
+		savePath=ServletActionContext.getServletContext().getRealPath(savePath);
 		this.savePath = savePath;
 	}
 
