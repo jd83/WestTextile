@@ -56,19 +56,15 @@ public class RegisterServiceImpl implements RegisterService{
 		}
 	}
 	public void modify(User user,List<Shops> shops) {
-		try {
-			for (Shops sp : shops) {
-				if (sp != null) {
-					sp.setUsername(user.getUsername());
-				} else {
-					shops.remove(sp);
-				}
+		for (Shops sp : shops) {
+			if (sp != null) {
+				sp.setUsername(user.getUsername());
+			} else {
+				shops.remove(sp);
 			}
-			updateUser(user);
-			addShops(shops);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+		updateUser(user);
+		addShops(shops);
 	}
 	
 	public List<Shops> getShopByUserName(String username) {

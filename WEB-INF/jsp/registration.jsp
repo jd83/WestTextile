@@ -84,9 +84,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				top.removeChild(obj);
 			}			
 		}
+
+
+		function uploadfile(){           
+			var ff = document.getElementsByName("upload");             
+			if(ff[0].value==''|| ff[0].value==null){                 
+				alert('请至少选择文件！');             
+			}else{                 
+				document.fileupload.submit();             
+			}         
+		} 
+		function showUploadFiles(){
+			var msg = '<s:property value="#message"/>'; 
+			var err = '<s:property value="#error"/>'; 
+			parent.document.getElementById("msg").innerHTML = msg; 
+			parent.document.getElementById("error").innerHTML = err; 
+		}
+
+
 	</script>
 </head>
-<body style="background-color:#E6E6FA" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<body onload="showUploadFiles()" style="background-color:#E6E6FA" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <!-- header -->
 <table width="90%" border="0" cellpadding="0" cellspacing="0" align="center">
 	<tr><td>
@@ -99,7 +117,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="register">
 		  	  <form action="<s:if test='#session.username==null||#session.username.isEmpty()'>Register</s:if><s:else>Register_Update</s:else>" method="POST"> 
 				 <div class="register-top-grid">
-					<font color="red" size="3"><s:fielderror></s:fielderror></font>
+					<font color="red" size="3"><s:fielderror/></font>
 					<h3>个人信息</h3>
 					 <div class="wow fadeInLeft" data-wow-delay="0.4s">
 						<span>手机/邮箱<label>*</label></span>
@@ -195,8 +213,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<input type="text" name="user.note" value="<s:property value='#request.user.note'/>"/>
 						 </div>							 
 				 </div>
-
-
+				<div class="register-but">
+				   <input type="button" onclick="document.getElementById('divUploadFile').style.display=(document.getElementById('divUploadFile').style.display=='none')?'':'none'"  value="添加文件" />
+				</div>
 				<div class="clearfix"> </div>
 				<div class="register-but">
 				   <input type="submit" value="<s:if test='#session.username==null||#session.username.isEmpty()'>注册</s:if><s:else>修改</s:else>">
@@ -204,16 +223,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</form>
 
-				 <form action="Upload" method="POST" enctype="multipart/form-data">
-					 <div class="register-bottom-grid">
-						<h3>上传附件</h3>
-						<s:actionerror></s:actionerror>
-						 <div class="wow fadeInRight" data-wow-delay="0.4s">
-							文件1:<input type="file" name="upload"><br/>
-							 <input type="submit" value="上传"/>
-						 </div>	
-					</div>
-				</form>
+			<div class="register-bottom-grid" id="divUploadFile" style="display:none">
+			 <form action="Upload" name="fileupload" method="POST" enctype="multipart/form-data" target="hidden_frame">
+				 
+					<h3>上传附件</h3>
+					<span id="error"></span><br/>
+					<span id="msg"></span><br/>
+					 <div class="wow fadeInRight" data-wow-delay="0.4s">
+						 <input type="file" name="upload"><br/>
+						 <input type="button" value="上传" onclick="uploadfile()"/>
+					 </div>	
+				
+				<iframe name='hidden_frame' id="hidden_frame" style='display:none'></iframe>
+			</form>
+			</div>
 
 		   </div>
 		 </div>
