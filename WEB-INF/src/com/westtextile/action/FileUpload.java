@@ -27,10 +27,12 @@ public class FileUpload extends ActionSupport{
 	public void addActionError(String anErrorMessage){
 		 //判断是否是文件上传超过限制大小异常 
 		 if (anErrorMessage.startsWith("Request exceeded allowed size limit")) {  
-		 super.addActionError("上传的文件大小不能超过5M！");  
+			 ActionContext.getContext().put("error", "上传的文件大小不能超过5M");
+			 super.addActionError("上传的文件大小不能超过5M！");  
 		   
 		 } else { 
 		 //如果不是文件上传大小异常则按原来的方法处理 
+			 ActionContext.getContext().put("error", anErrorMessage);
 		 super.addActionError(anErrorMessage);  
 		}  
 	}

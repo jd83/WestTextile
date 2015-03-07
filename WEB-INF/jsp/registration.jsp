@@ -100,7 +100,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			parent.document.getElementById("msg").innerHTML = msg; 
 			parent.document.getElementById("error").innerHTML = err; 
 		}
+		function show(){         
+			var mask = document.getElementById("mask");                       
+			var h_c = document.documentElement.clientHeight/3;         
+			var w_c = document.documentElement.clientWidth/3;                  
+			var h_b = document.body.clientHeight/3;         
+			var w_b = document.body.clientWidth/3;                            
+			mask.style.width = w_c > w_b ? w_c+"px" : w_b+"px";        
+			mask.style.height = h_c > h_b ? h_c+"px" : h_b+"px";                  
+			mask.style.left = mask.style.width;
+			mask.style.top = mask.style.height;
+			mask.style.display = "block";     
+		}           
+		function hidden(){
+			alert(111);
+			var mask = document.getElementById("mask");             
+			mask.style.display = "none";    
+		}
 
+		function popUpload(){         
+			var mask = document.getElementById("mask");
+			if(mask.style.display =="none"){
+				show();
+			}else{
+				hidden();
+			}
+		}
 
 	</script>
 </head>
@@ -214,7 +239,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						 </div>							 
 				 </div>
 				<div class="register-but">
-				   <input type="button" onclick="document.getElementById('divUploadFile').style.display=(document.getElementById('divUploadFile').style.display=='none')?'':'none'"  value="添加文件" />
+				   <!--<input type="button" onclick="document.getElementById('divUploadFile').style.display=(document.getElementById('divUploadFile').style.display=='none')?'':'none'"  value="添加文件" />-->
+					<input type="button" onclick="popUpload()" value="添加文件"/>
 				</div>
 				<div class="clearfix"> </div>
 				<div class="register-but">
@@ -223,17 +249,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</form>
 
-			<div class="register-bottom-grid" id="divUploadFile" style="display:none">
+			<div id="mask" class="mask" style="display:none">
 			 <form action="Upload" name="fileupload" method="POST" enctype="multipart/form-data" target="hidden_frame">
-				 
-					<h3>上传附件</h3>
-					<span id="error"></span><br/>
-					<span id="msg"></span><br/>
-					 <div class="wow fadeInRight" data-wow-delay="0.4s">
-						 <input type="file" name="upload"><br/>
-						 <input type="button" value="上传" onclick="uploadfile()"/>
-					 </div>	
-				
+				 <div class="upload-content">
+
+					<table border=0 width="80%" align="center">
+						<caption>上传附件</caption>
+						<tr align="bottom"><td>
+							<input type="button" value="+"/>
+							<input type="button" value="-"/>
+						</td><td align="bottom">
+							<input type="file" name="upload"><br/>
+						</td></tr>
+						<tr><td>
+							<input type="button" value="上传" onclick="uploadfile()"/>
+						</td>
+						<td>
+							<input type="button" value="关闭" onclick="document.getElementById('mask').style.display='none'"/>
+						</td></tr>
+						<tr><td colspan=2>
+							<span id="error"></span><br/>
+							<span id="msg"></span><br/>
+						</td></tr>
+					</table>
+				</div>
 				<iframe name='hidden_frame' id="hidden_frame" style='display:none'></iframe>
 			</form>
 			</div>

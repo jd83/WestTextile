@@ -1062,6 +1062,7 @@ div#portfoliolist {
 .login-page {
 	padding: 5em 0;
 }
+
 /*--register--*/
 .register{
 	padding:4em 0 5em 0;
@@ -1196,11 +1197,11 @@ div.register-bottom-grid {
 	padding-bottom: 15px;
 	margin: 0;
 	font-weight: 600;
-	font-family:Î¢ÈíÑÅºÚ
+	font-family:Î¢ÈíÑÅºÚ;
 }
 
 .container table[name="logintb"] {
-	background:#fff;
+	background:#E6E6FA;
 	filter:Alpha(opacity=60);
 	box-shadow:10px 10px 20px rgba(0,0,0,0.5);}
 	-moz-opacity:0.8;
@@ -1232,6 +1233,34 @@ div.register-bottom-grid {
 	margin-left:5%;
 	
 }
+
+.mask{
+	position:absolute;         
+	z-index:999;         
+	background:#E6E6FA;
+	filter:Alpha(opacity=60);
+	box-shadow:10px 10px 20px rgba(0,0,0,0.5);}
+	-moz-opacity:1;
+	-khtml-opacity: 1;
+	opacity: 1;
+	border-style: solid;
+	border-width: 60%
+	top:0;         
+	left:0;         
+	display:none;         
+	font-family:Î¢ÈíÑÅºÚ;
+}
+
+.upload-content{
+	color:black;
+	background:#fff;
+	font-size: 1.2em;
+	padding-bottom: 15px;
+	margin: 0;
+	font-weight: 600;
+	font-family:Î¢ÈíÑÅºÚ;
+}
+
 /*--responsive design--*/
 @media (max-width:1280px){	
 .banner-info {

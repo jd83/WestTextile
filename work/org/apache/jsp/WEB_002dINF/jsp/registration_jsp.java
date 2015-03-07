@@ -183,7 +183,32 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t\tparent.document.getElementById(\"msg\").innerHTML = msg; \r\n");
       out.write("\t\t\tparent.document.getElementById(\"error\").innerHTML = err; \r\n");
       out.write("\t\t}\r\n");
+      out.write("\t\tfunction show(){         \r\n");
+      out.write("\t\t\tvar mask = document.getElementById(\"mask\");                       \r\n");
+      out.write("\t\t\tvar h_c = document.documentElement.clientHeight/3;         \r\n");
+      out.write("\t\t\tvar w_c = document.documentElement.clientWidth/3;                  \r\n");
+      out.write("\t\t\tvar h_b = document.body.clientHeight/3;         \r\n");
+      out.write("\t\t\tvar w_b = document.body.clientWidth/3;                            \r\n");
+      out.write("\t\t\tmask.style.width = w_c > w_b ? w_c+\"px\" : w_b+\"px\";        \r\n");
+      out.write("\t\t\tmask.style.height = h_c > h_b ? h_c+\"px\" : h_b+\"px\";                  \r\n");
+      out.write("\t\t\tmask.style.left = mask.style.width;\r\n");
+      out.write("\t\t\tmask.style.top = mask.style.height;\r\n");
+      out.write("\t\t\tmask.style.display = \"block\";     \r\n");
+      out.write("\t\t}           \r\n");
+      out.write("\t\tfunction hidden(){\r\n");
+      out.write("\t\t\talert(111);\r\n");
+      out.write("\t\t\tvar mask = document.getElementById(\"mask\");             \r\n");
+      out.write("\t\t\tmask.style.display = \"none\";    \r\n");
+      out.write("\t\t}\r\n");
       out.write("\r\n");
+      out.write("\t\tfunction popUpload(){         \r\n");
+      out.write("\t\t\tvar mask = document.getElementById(\"mask\");\r\n");
+      out.write("\t\t\tif(mask.style.display ==\"none\"){\r\n");
+      out.write("\t\t\t\tshow();\r\n");
+      out.write("\t\t\t}else{\r\n");
+      out.write("\t\t\t\thidden();\r\n");
+      out.write("\t\t\t}\r\n");
+      out.write("\t\t}\r\n");
       out.write("\r\n");
       out.write("\t</script>\r\n");
       out.write("</head>\r\n");
@@ -383,7 +408,8 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t\t\t\t\t </div>\t\t\t\t\t\t\t \r\n");
       out.write("\t\t\t\t </div>\r\n");
       out.write("\t\t\t\t<div class=\"register-but\">\r\n");
-      out.write("\t\t\t\t   <input type=\"button\" onclick=\"document.getElementById('divUploadFile').style.display=(document.getElementById('divUploadFile').style.display=='none')?'':'none'\"  value=\"添加文件\" />\r\n");
+      out.write("\t\t\t\t   <!--<input type=\"button\" onclick=\"document.getElementById('divUploadFile').style.display=(document.getElementById('divUploadFile').style.display=='none')?'':'none'\"  value=\"添加文件\" />-->\r\n");
+      out.write("\t\t\t\t\t<input type=\"button\" onclick=\"popUpload()\" value=\"添加文件\"/>\r\n");
       out.write("\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t<div class=\"clearfix\"> </div>\r\n");
       out.write("\t\t\t\t<div class=\"register-but\">\r\n");
@@ -397,17 +423,30 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t\t\t</div>\r\n");
       out.write("\t\t\t</form>\r\n");
       out.write("\r\n");
-      out.write("\t\t\t<div class=\"register-bottom-grid\" id=\"divUploadFile\" style=\"display:none\">\r\n");
+      out.write("\t\t\t<div id=\"mask\" class=\"mask\" style=\"display:none\">\r\n");
       out.write("\t\t\t <form action=\"Upload\" name=\"fileupload\" method=\"POST\" enctype=\"multipart/form-data\" target=\"hidden_frame\">\r\n");
-      out.write("\t\t\t\t \r\n");
-      out.write("\t\t\t\t\t<h3>上传附件</h3>\r\n");
-      out.write("\t\t\t\t\t<span id=\"error\"></span><br/>\r\n");
-      out.write("\t\t\t\t\t<span id=\"msg\"></span><br/>\r\n");
-      out.write("\t\t\t\t\t <div class=\"wow fadeInRight\" data-wow-delay=\"0.4s\">\r\n");
-      out.write("\t\t\t\t\t\t <input type=\"file\" name=\"upload\"><br/>\r\n");
-      out.write("\t\t\t\t\t\t <input type=\"button\" value=\"上传\" onclick=\"uploadfile()\"/>\r\n");
-      out.write("\t\t\t\t\t </div>\t\r\n");
-      out.write("\t\t\t\t\r\n");
+      out.write("\t\t\t\t <div class=\"upload-content\">\r\n");
+      out.write("\r\n");
+      out.write("\t\t\t\t\t<table border=0 width=\"80%\" align=\"center\">\r\n");
+      out.write("\t\t\t\t\t\t<caption>上传附件</caption>\r\n");
+      out.write("\t\t\t\t\t\t<tr align=\"bottom\"><td>\r\n");
+      out.write("\t\t\t\t\t\t\t<input type=\"button\" value=\"+\"/>\r\n");
+      out.write("\t\t\t\t\t\t\t<input type=\"button\" value=\"-\"/>\r\n");
+      out.write("\t\t\t\t\t\t</td><td align=\"bottom\">\r\n");
+      out.write("\t\t\t\t\t\t\t<input type=\"file\" name=\"upload\"><br/>\r\n");
+      out.write("\t\t\t\t\t\t</td></tr>\r\n");
+      out.write("\t\t\t\t\t\t<tr><td>\r\n");
+      out.write("\t\t\t\t\t\t\t<input type=\"button\" value=\"上传\" onclick=\"uploadfile()\"/>\r\n");
+      out.write("\t\t\t\t\t\t</td>\r\n");
+      out.write("\t\t\t\t\t\t<td>\r\n");
+      out.write("\t\t\t\t\t\t\t<input type=\"button\" value=\"关闭\" onclick=\"document.getElementById('mask').style.display='none'\"/>\r\n");
+      out.write("\t\t\t\t\t\t</td></tr>\r\n");
+      out.write("\t\t\t\t\t\t<tr><td colspan=2>\r\n");
+      out.write("\t\t\t\t\t\t\t<span id=\"error\"></span><br/>\r\n");
+      out.write("\t\t\t\t\t\t\t<span id=\"msg\"></span><br/>\r\n");
+      out.write("\t\t\t\t\t\t</td></tr>\r\n");
+      out.write("\t\t\t\t\t</table>\r\n");
+      out.write("\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t<iframe name='hidden_frame' id=\"hidden_frame\" style='display:none'></iframe>\r\n");
       out.write("\t\t\t</form>\r\n");
       out.write("\t\t\t</div>\r\n");
@@ -588,7 +627,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.IfTag _jspx_th_s_005fif_005f1 = (org.apache.struts2.views.jsp.IfTag) _005fjspx_005ftagPool_005fs_005fif_0026_005ftest.get(org.apache.struts2.views.jsp.IfTag.class);
     _jspx_th_s_005fif_005f1.setPageContext(_jspx_page_context);
     _jspx_th_s_005fif_005f1.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(118,21) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(143,21) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fif_005f1.setTest("#session.username==null||#session.username.isEmpty()");
     int _jspx_eval_s_005fif_005f1 = _jspx_th_s_005fif_005f1.doStartTag();
     if (_jspx_eval_s_005fif_005f1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -673,7 +712,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f3 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f3.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f3.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(124,53) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(149,53) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f3.setValue("#request.user.username");
     int _jspx_eval_s_005fproperty_005f3 = _jspx_th_s_005fproperty_005f3.doStartTag();
     if (_jspx_th_s_005fproperty_005f3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -692,9 +731,9 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.ui.HiddenTag _jspx_th_s_005fhidden_005f0 = (org.apache.struts2.views.jsp.ui.HiddenTag) _005fjspx_005ftagPool_005fs_005fhidden_0026_005ftheme_005fname_005fnobody.get(org.apache.struts2.views.jsp.ui.HiddenTag.class);
     _jspx_th_s_005fhidden_005f0.setPageContext(_jspx_page_context);
     _jspx_th_s_005fhidden_005f0.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(125,6) name = theme type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(150,6) name = theme type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fhidden_005f0.setTheme("simple");
-    // /WEB-INF/jsp/registration.jsp(125,6) name = name type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(150,6) name = name type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fhidden_005f0.setName("user.userid");
     int _jspx_eval_s_005fhidden_005f0 = _jspx_th_s_005fhidden_005f0.doStartTag();
     if (_jspx_th_s_005fhidden_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -713,7 +752,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f4 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f4.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f4.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(129,57) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(154,57) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f4.setValue("#request.user.displayname");
     int _jspx_eval_s_005fproperty_005f4 = _jspx_th_s_005fproperty_005f4.doStartTag();
     if (_jspx_th_s_005fproperty_005f4.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -732,7 +771,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f5 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f5.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f5.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(133,57) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(158,57) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f5.setValue("#request.user.password");
     int _jspx_eval_s_005fproperty_005f5 = _jspx_th_s_005fproperty_005f5.doStartTag();
     if (_jspx_th_s_005fproperty_005f5.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -751,7 +790,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f6 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f6.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f6.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(137,55) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(162,55) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f6.setValue("#request.repassword");
     int _jspx_eval_s_005fproperty_005f6 = _jspx_th_s_005fproperty_005f6.doStartTag();
     if (_jspx_th_s_005fproperty_005f6.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -770,7 +809,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f7 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f7.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f7.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(142,118) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(167,118) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f7.setValue("#request.hasshopinfo");
     int _jspx_eval_s_005fproperty_005f7 = _jspx_th_s_005fproperty_005f7.doStartTag();
     if (_jspx_th_s_005fproperty_005f7.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -789,7 +828,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.IfTag _jspx_th_s_005fif_005f2 = (org.apache.struts2.views.jsp.IfTag) _005fjspx_005ftagPool_005fs_005fif_0026_005ftest.get(org.apache.struts2.views.jsp.IfTag.class);
     _jspx_th_s_005fif_005f2.setPageContext(_jspx_page_context);
     _jspx_th_s_005fif_005f2.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(145,4) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(170,4) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fif_005f2.setTest("#request.hasshopinfo!=''&& #request.hasshopinfo!=null");
     int _jspx_eval_s_005fif_005f2 = _jspx_th_s_005fif_005f2.doStartTag();
     if (_jspx_eval_s_005fif_005f2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -861,11 +900,11 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.IteratorTag _jspx_th_s_005fiterator_005f0 = (org.apache.struts2.views.jsp.IteratorTag) _005fjspx_005ftagPool_005fs_005fiterator_0026_005fvalue_005fstatus_005fid.get(org.apache.struts2.views.jsp.IteratorTag.class);
     _jspx_th_s_005fiterator_005f0.setPageContext(_jspx_page_context);
     _jspx_th_s_005fiterator_005f0.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(152,5) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(177,5) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fiterator_005f0.setValue("shops");
-    // /WEB-INF/jsp/registration.jsp(152,5) name = id type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(177,5) name = id type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fiterator_005f0.setId("sp");
-    // /WEB-INF/jsp/registration.jsp(152,5) name = status type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(177,5) name = status type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fiterator_005f0.setStatus("u");
     int _jspx_eval_s_005fiterator_005f0 = _jspx_th_s_005fiterator_005f0.doStartTag();
     if (_jspx_eval_s_005fiterator_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -946,7 +985,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f8 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f8.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f8.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(157,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(182,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f8.setValue("#u.index");
     int _jspx_eval_s_005fproperty_005f8 = _jspx_th_s_005fproperty_005f8.doStartTag();
     if (_jspx_th_s_005fproperty_005f8.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -965,7 +1004,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f9 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f9.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f9.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(157,103) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(182,103) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f9.setValue("#sp.shopname");
     int _jspx_eval_s_005fproperty_005f9 = _jspx_th_s_005fproperty_005f9.doStartTag();
     if (_jspx_th_s_005fproperty_005f9.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -984,7 +1023,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f10 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f10.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f10.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(161,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(186,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f10.setValue("#u.index");
     int _jspx_eval_s_005fproperty_005f10 = _jspx_th_s_005fproperty_005f10.doStartTag();
     if (_jspx_th_s_005fproperty_005f10.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1003,7 +1042,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.IfTag _jspx_th_s_005fif_005f3 = (org.apache.struts2.views.jsp.IfTag) _005fjspx_005ftagPool_005fs_005fif_0026_005ftest.get(org.apache.struts2.views.jsp.IfTag.class);
     _jspx_th_s_005fif_005f3.setPageContext(_jspx_page_context);
     _jspx_th_s_005fif_005f3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(161,103) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(186,103) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fif_005f3.setTest("#sp.shoptype!=null");
     int _jspx_eval_s_005fif_005f3 = _jspx_th_s_005fif_005f3.doStartTag();
     if (_jspx_eval_s_005fif_005f3 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -1039,7 +1078,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f11 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f11.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f11.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fif_005f3);
-    // /WEB-INF/jsp/registration.jsp(161,135) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(186,135) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f11.setValue("#sp.shoptype");
     int _jspx_eval_s_005fproperty_005f11 = _jspx_th_s_005fproperty_005f11.doStartTag();
     if (_jspx_th_s_005fproperty_005f11.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1091,7 +1130,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f12 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f12.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f12.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(165,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(190,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f12.setValue("#u.index");
     int _jspx_eval_s_005fproperty_005f12 = _jspx_th_s_005fproperty_005f12.doStartTag();
     if (_jspx_th_s_005fproperty_005f12.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1110,7 +1149,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f13 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f13.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f13.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(165,107) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(190,107) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f13.setValue("#sp.shopsquare");
     int _jspx_eval_s_005fproperty_005f13 = _jspx_th_s_005fproperty_005f13.doStartTag();
     if (_jspx_th_s_005fproperty_005f13.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1129,7 +1168,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f14 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f14.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f14.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(169,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(194,40) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f14.setValue("#u.index");
     int _jspx_eval_s_005fproperty_005f14 = _jspx_th_s_005fproperty_005f14.doStartTag();
     if (_jspx_th_s_005fproperty_005f14.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1148,7 +1187,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f15 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f15.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f15.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_005fiterator_005f0);
-    // /WEB-INF/jsp/registration.jsp(169,107) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(194,107) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f15.setValue("#sp.shopamount");
     int _jspx_eval_s_005fproperty_005f15 = _jspx_th_s_005fproperty_005f15.doStartTag();
     if (_jspx_th_s_005fproperty_005f15.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1167,7 +1206,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f16 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f16.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f16.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(177,123) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(202,123) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f16.setValue("#request.hasadditioninfo");
     int _jspx_eval_s_005fproperty_005f16 = _jspx_th_s_005fproperty_005f16.doStartTag();
     if (_jspx_th_s_005fproperty_005f16.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1186,7 +1225,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.IfTag _jspx_th_s_005fif_005f4 = (org.apache.struts2.views.jsp.IfTag) _005fjspx_005ftagPool_005fs_005fif_0026_005ftest.get(org.apache.struts2.views.jsp.IfTag.class);
     _jspx_th_s_005fif_005f4.setPageContext(_jspx_page_context);
     _jspx_th_s_005fif_005f4.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(180,4) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(205,4) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fif_005f4.setTest("#request.hasadditioninfo!='' && #request.hasadditioninfo!=null");
     int _jspx_eval_s_005fif_005f4 = _jspx_th_s_005fif_005f4.doStartTag();
     if (_jspx_eval_s_005fif_005f4 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -1258,7 +1297,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f17 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f17.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f17.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(189,50) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(214,50) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f17.setValue("#request.user.name");
     int _jspx_eval_s_005fproperty_005f17 = _jspx_th_s_005fproperty_005f17.doStartTag();
     if (_jspx_th_s_005fproperty_005f17.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1277,7 +1316,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f18 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f18.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f18.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(193,50) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(218,50) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f18.setValue("#request.user.sex");
     int _jspx_eval_s_005fproperty_005f18 = _jspx_th_s_005fproperty_005f18.doStartTag();
     if (_jspx_th_s_005fproperty_005f18.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1296,7 +1335,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f19 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f19.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f19.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(197,56) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(222,56) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f19.setValue("#request.user.identityid");
     int _jspx_eval_s_005fproperty_005f19 = _jspx_th_s_005fproperty_005f19.doStartTag();
     if (_jspx_th_s_005fproperty_005f19.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1315,7 +1354,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f20 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f20.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f20.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(201,55) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(226,55) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f20.setValue("#request.user.qqnumber");
     int _jspx_eval_s_005fproperty_005f20 = _jspx_th_s_005fproperty_005f20.doStartTag();
     if (_jspx_th_s_005fproperty_005f20.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1334,7 +1373,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f21 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f21.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f21.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(205,52) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(230,52) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f21.setValue("#request.user.career");
     int _jspx_eval_s_005fproperty_005f21 = _jspx_th_s_005fproperty_005f21.doStartTag();
     if (_jspx_th_s_005fproperty_005f21.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1353,7 +1392,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f22 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f22.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f22.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(209,49) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(234,49) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f22.setValue("#request.user.age");
     int _jspx_eval_s_005fproperty_005f22 = _jspx_th_s_005fproperty_005f22.doStartTag();
     if (_jspx_th_s_005fproperty_005f22.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1372,7 +1411,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_005fproperty_005f23 = (org.apache.struts2.views.jsp.PropertyTag) _005fjspx_005ftagPool_005fs_005fproperty_0026_005fvalue_005fnobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
     _jspx_th_s_005fproperty_005f23.setPageContext(_jspx_page_context);
     _jspx_th_s_005fproperty_005f23.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(213,50) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(238,50) name = value type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fproperty_005f23.setValue("#request.user.note");
     int _jspx_eval_s_005fproperty_005f23 = _jspx_th_s_005fproperty_005f23.doStartTag();
     if (_jspx_th_s_005fproperty_005f23.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
@@ -1391,7 +1430,7 @@ public final class registration_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.struts2.views.jsp.IfTag _jspx_th_s_005fif_005f5 = (org.apache.struts2.views.jsp.IfTag) _005fjspx_005ftagPool_005fs_005fif_0026_005ftest.get(org.apache.struts2.views.jsp.IfTag.class);
     _jspx_th_s_005fif_005f5.setPageContext(_jspx_page_context);
     _jspx_th_s_005fif_005f5.setParent(null);
-    // /WEB-INF/jsp/registration.jsp(221,35) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/registration.jsp(247,35) name = test type = java.lang.String reqTime = false required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_s_005fif_005f5.setTest("#session.username==null||#session.username.isEmpty()");
     int _jspx_eval_s_005fif_005f5 = _jspx_th_s_005fif_005f5.doStartTag();
     if (_jspx_eval_s_005fif_005f5 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
