@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.interceptor.validation.SkipValidation;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
@@ -51,14 +53,23 @@ public class Register extends ActionSupport {
 	private String hasadditioninfo;
 	private Shops shop;
 	protected List<Shops> shops;
+	protected List<String> filename;
+	protected List<String> shopname;
+	private String uploadfilehtml;
 
 	RegisterService registerService = new RegisterServiceImpl();
-	
+	@Validations(requiredStrings={
+	        @RequiredStringValidator(fieldName="user.username",message="手机/邮箱不能为空！"),
+	        @RequiredStringValidator(fieldName="user.password",message="密码不能为空！")
+	    }
+	)
+	@SkipValidation
 	public String execute() throws Exception {
 		refresh();
 		return SUCCESS;
 	}
 
+	@SkipValidation
 	public void refresh() {
 		RegisterService registerService = new RegisterServiceImpl();
 		// if login,show user info edit,else show user register
@@ -130,7 +141,8 @@ public class Register extends ActionSupport {
 		}
 		return result;
 	}
-
+	
+	@SkipValidation
 	public void registerCheckPassword() {
 		// check password
 		if (!repassword.equals(user.getPassword())) {
@@ -138,6 +150,7 @@ public class Register extends ActionSupport {
 		}			
 	}
 	
+	@SkipValidation	
 	public void registerCheckUserDup() {
 		UserDao userDao=new UserDaoImpl();
 		User userDb = userDao.getUserByUserName(user
@@ -149,6 +162,7 @@ public class Register extends ActionSupport {
 				
 	}
 	
+	@SkipValidation	
 	public void registerCheckShopInfo() {
 
 		for (int i = 0; i < shops.size(); i++) {
@@ -223,5 +237,30 @@ public class Register extends ActionSupport {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public List<String> getFilename() {
+		return filename;
+	}
+
+	public void setFilename(List<String> filename) {
+		this.filename = filename;
+	}
+
+	public List<String> getShopname() {
+		return shopname;
+	}
+
+	public void setShopname(List<String> shopname) {
+		this.shopname = shopname;
+	}
+
+	public String getUploadfilehtml() {
+		return uploadfilehtml;
+	}
+
+	public void setUploadfilehtml(String uploadfilehtml) {
+		this.uploadfilehtml = uploadfilehtml;
+	}
+
 
 }

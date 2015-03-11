@@ -41,7 +41,7 @@ public class RegisterServiceImpl implements RegisterService{
 	}
 	
 	public void register(User user,List<Shops> shops) {
-		try {
+
 			for (Shops sp : shops) {
 				if (sp != null) {
 					sp.setUsername(user.getUsername());
@@ -51,9 +51,7 @@ public class RegisterServiceImpl implements RegisterService{
 			}
 			addUser(user);
 			addShops(shops);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 	public void modify(User user,List<Shops> shops) {
 		for (Shops sp : shops) {

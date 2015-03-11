@@ -53,7 +53,7 @@ public class Login extends ActionSupport {
 	}
 	
 	@Validations(requiredStrings={
-	        @RequiredStringValidator(fieldName="user.username",message="用户名不能为空！"),
+	        @RequiredStringValidator(fieldName="user.username",message="手机/邮箱不能为空！"),
 	        @RequiredStringValidator(fieldName="user.password",message="密码不能为空！")
 	    }
 	)

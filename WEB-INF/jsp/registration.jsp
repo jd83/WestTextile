@@ -30,6 +30,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		mainClass: 'my-mfp-zoom-in'
 		});
 		});
+		String.prototype.trim=function(){
+		　　    return this.replace(/(^\s*)|(\s*$)/g, "");
+		}
+
+		function isUniqueArr(arr) {
+			var isUnique=true;
+			var  hash = {};
+			for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+				elem=arr[i].value;
+				if (!hash[elem]) {
+					hash[elem] = true;
+				}else{
+					isUnique=false;
+				}
+			}
+			return isUnique;
+		}
+
+		function isUniqueStrInArr(arr,str) {
+			var isUnique=true;
+			for(var i=0;i<arr.length;i++){
+				if(arr[i]==str){
+					isUnique=false;
+				}
+			}
+			return isUnique;
+		}
 
 		function showChkInfo(obj,disDiv){
 			chkShopInfo=document.getElementById(obj.id);
@@ -85,20 +112,78 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			}			
 		}
 
+		function addUploadFile(){
+			var parentTr=document.getElementById("tbUploadFile");
+			var trFile=document.getElementById("trUploadFile").cloneNode(true);
+			parentTr.appendChild(trFile);
+		}
+
+		function removeUploadFile(obj){
+			var parentTr=document.getElementById("tbUploadFile");
+			var trFile=document.getElementsByName("trUploadFile");
+			if(trFile.length>1){
+				if(obj.parentNode.tagName=="TBODY"){
+					obj=obj.parentNode;
+				}
+				parentTr.removeChild(obj);
+			}			
+		}
+
 
 		function uploadfile(){           
-			var ff = document.getElementsByName("upload");             
+			var ff = document.getElementsByName("upload");
+			var isUnique=isUniqueArr(ff);
 			if(ff[0].value==''|| ff[0].value==null){                 
 				alert('请至少选择文件！');             
-			}else{                 
+			}else if (!isUnique)
+			{
+				alert('上传文件不能重复，请删除重复文件！');
+			}else{
+				
 				document.fileupload.submit();             
 			}         
 		} 
 		function showUploadFiles(){
 			var msg = '<s:property value="#message"/>'; 
 			var err = '<s:property value="#error"/>'; 
+			var file = '<s:property value="#request.uploadFileName"/>';
+			file=file.substr(1,file.length-2);
+			//parent.document.getElementById("divAddAttach").innerHTML = file; 
+
 			parent.document.getElementById("msg").innerHTML = msg; 
 			parent.document.getElementById("error").innerHTML = err; 
+			if(err!=null&&err!=""){
+				return;
+			}
+			var arrfile=file.split(",");
+			for (var i=0;i<arrfile.length;i++ )
+			{
+				if(arrfile[i]==null||arrfile[i]==""){
+					continue;
+				}
+				var createdFiles=parent.document.getElementsByName("filename")
+				if(createdFiles==null)
+					continue;
+				var arrCreatedFiles=new Array();
+				for(var j=0;j<createdFiles.length;j++){
+					arrCreatedFiles.push(createdFiles[j].value);
+				}
+				var curFile=arrfile[i].trim();
+				if(!isUniqueStrInArr(arrCreatedFiles,curFile)){
+					continue;
+				}
+
+				var spanUploadedFile=document.createElement("input");
+				var attValue=document.createAttribute("value");
+				var attName=document.createAttribute("name");
+				attValue.value=curFile;
+				attName.value="filename"
+				spanUploadedFile.setAttributeNode(attValue);
+				spanUploadedFile.setAttributeNode(attName);
+				parent.document.getElementById("divAddAttach").appendChild(spanUploadedFile);
+			}
+			parent.document.getElementById("uploadfilehtml").value=parent.document.getElementById("divAddAttach").innerHTML;
+
 		}
 		function show(){         
 			var mask = document.getElementById("mask");                       
@@ -113,7 +198,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			mask.style.display = "block";     
 		}           
 		function hidden(){
-			alert(111);
 			var mask = document.getElementById("mask");             
 			mask.style.display = "none";    
 		}
@@ -125,6 +209,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			}else{
 				hidden();
 			}
+		}
+		function closeUpload(){
+			document.getElementById('mask').style.display='none';
 		}
 
 	</script>
@@ -199,6 +286,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				 <div class="register-top-grid">
 					 <div class="clearfix"> </div>
 					   <a class="news-letter" href="#">
+						 <label class="checkbox"><input type="checkbox" id="chkAddAttach" onclick="popUpload()" ><i> </i>上传商铺文件图片</label>
+					   </a>
+					   <input type="hidden" id="uploadfilehtml" name="uploadfilehtml"/>
+				</div>
+			   <div class="register-bottom-grid" id="divAddAttach">
+				<s:property value="#request.uploadfilehtml" escape="false"/>
+			   </div>
+				 <div class="register-top-grid">
+					 <div class="clearfix"> </div>
+					   <a class="news-letter" href="#">
 						 <label class="checkbox"><input type="checkbox" id="chkAdditionInfo" onclick="showChkInfo(this,'divAdditionInfo');"  <s:property value="#request.hasadditioninfo"/>><i> </i>补充个人信息</label>
 					   </a>
 				</div>
@@ -238,34 +335,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<input type="text" name="user.note" value="<s:property value='#request.user.note'/>"/>
 						 </div>							 
 				 </div>
+
+				<!--
 				<div class="register-but">
-				   <!--<input type="button" onclick="document.getElementById('divUploadFile').style.display=(document.getElementById('divUploadFile').style.display=='none')?'':'none'"  value="添加文件" />-->
-					<input type="button" onclick="popUpload()" value="添加文件"/>
-				</div>
+					<input type="button" onclick="popUpload()" value="点击上传文件"/>
+				</div>-->
 				<div class="clearfix"> </div>
 				<div class="register-but">
 				   <input type="submit" value="<s:if test='#session.username==null||#session.username.isEmpty()'>注册</s:if><s:else>修改</s:else>">
 				   <div class="clearfix"> </div>
 				</div>
 			</form>
-
+			<!--上传文件-->
 			<div id="mask" class="mask" style="display:none">
 			 <form action="Upload" name="fileupload" method="POST" enctype="multipart/form-data" target="hidden_frame">
 				 <div class="upload-content">
 
-					<table border=0 width="80%" align="center">
+					<table id="tbUploadFile" border=0 width="95%" align="center">
 						<caption>上传附件</caption>
-						<tr align="bottom"><td>
-							<input type="button" value="+"/>
-							<input type="button" value="-"/>
-						</td><td align="bottom">
+						<tr id="trUploadFile" name="trUploadFile" Valign="top"><td Valign="top">
+							<input type="button" value="+" onclick="addUploadFile()"/>
+							<input type="button" value="-" onclick="removeUploadFile(this.parentNode.parentNode)"/>
+						</td><td>
+							商铺号
+							<input type="text" name="shopname" id="shopname" value="<s:property value='#request.shopname'/>" onblur="if (this.value == '') {this.value = '格式：x-x-x';}"> 
+						</td>
+						</td><td>
 							<input type="file" name="upload"><br/>
 						</td></tr>
-						<tr><td>
+					</table>
+					<table border=0 width="95%" align="center">
+						<tr align="center"><td>
 							<input type="button" value="上传" onclick="uploadfile()"/>
-						</td>
-						<td>
-							<input type="button" value="关闭" onclick="document.getElementById('mask').style.display='none'"/>
+
+							<input type="button" value="关闭" onclick="closeUpload()"/>
 						</td></tr>
 						<tr><td colspan=2>
 							<span id="error"></span><br/>

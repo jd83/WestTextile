@@ -22,12 +22,18 @@ body a{
 table caption{
 	color: #fbb034;
 	text-decoration: none;
-	font-size: 1.4em;
-	font-weight: 400;
+	font-size: 1.2em;
+	font-weight: 600;
+	font-family:Î¢ÈíÑÅºÚ
 }
 
 table td{
-	color: #fbb034;
+	padding:0.2px;
+	color:#555;
+	font-size: 0.85em;
+	padding-bottom: 0.2em;
+	text-transform: uppercase;
+	font-family:Î¢ÈíÑÅºÚ
 }
 
 .header{
@@ -1170,7 +1176,25 @@ div#portfoliolist {
 .register-but{
 	margin-top:1em;
 }
-.register-but input[type="submit"] {
+.register-but input[type="button"]{
+	background: #7CCD7C;
+	color: #fbb034;
+	font-size: 1.2em;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	display: inline-block;
+	text-transform: uppercase;
+	border: none;
+	outline: none;
+	font-weight: 600;
+	font-family:Î¢ÈíÑÅºÚ;
+}
+.register-but input[type="button"]:hover {
+	background:#6a737b;
+}
+.register-but input[type="submit"]{
 	background: #fbb034;
 	color: #FFF;
 	font-size: 1.2em;
@@ -1201,7 +1225,7 @@ div.register-bottom-grid {
 }
 
 .container table[name="logintb"] {
-	background:#fff;
+	background:#E6E6FA;
 	filter:Alpha(opacity=60);
 	box-shadow:10px 10px 20px rgba(0,0,0,0.5);}
 	-moz-opacity:0.8;

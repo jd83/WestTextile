@@ -30,6 +30,7 @@ shopamount INT DEFAULT 0,
 buildnumber INT,
 floornumber INT,
 username VARCHAR(20), 
+attachmentid VARCHAR(200),
 note VARCHAR(100),
 indate timestamp default current_timestamp,
 PRIMARY KEY(shopid)
