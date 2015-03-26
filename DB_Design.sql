@@ -15,6 +15,8 @@ sex CHAR(2),
 age INT,
 identityid VARCHAR(20),
 indate timestamp default current_timestamp,
+editdate timestamp default current_timestamp,
+attachmentid VARCHAR(200),
 note VARCHAR(100),
 PRIMARY KEY(userid)
 )ENGINE=InnoDB DEFAULT CHARSET=gb2312;
@@ -22,6 +24,7 @@ PRIMARY KEY(userid)
 CREATE TABLE shops
 (
 shopid INT AUTO_INCREMENT,
+projectname VARCHAR(20) NOT NULL,
 shopname VARCHAR(20) NOT NULL,
 shoptype VARCHAR(10) NOT NULL,
 shopsquare DEC(5,2) DEFAULT 000.00,
