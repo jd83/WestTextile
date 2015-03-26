@@ -152,6 +152,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 			parent.document.getElementById("msg").innerHTML = msg; 
 			parent.document.getElementById("error").innerHTML = err; 
+			alert(err);
 			if(err!=null&&err!=""){
 				return;
 			}
