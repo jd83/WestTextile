@@ -41,7 +41,7 @@ public class RegisterServiceImpl implements RegisterService{
 	}
 	
 	public void register(User user,List<Shops> shops) {
-		try {
+
 			for (Shops sp : shops) {
 				if (sp != null) {
 					sp.setUsername(user.getUsername());
@@ -51,24 +51,18 @@ public class RegisterServiceImpl implements RegisterService{
 			}
 			addUser(user);
 			addShops(shops);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 	public void modify(User user,List<Shops> shops) {
-		try {
-			for (Shops sp : shops) {
-				if (sp != null) {
-					sp.setUsername(user.getUsername());
-				} else {
-					shops.remove(sp);
-				}
+		for (Shops sp : shops) {
+			if (sp != null) {
+				sp.setUsername(user.getUsername());
+			} else {
+				shops.remove(sp);
 			}
-			updateUser(user);
-			addShops(shops);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+		updateUser(user);
+		addShops(shops);
 	}
 	
 	public List<Shops> getShopByUserName(String username) {
@@ -92,6 +86,8 @@ public class RegisterServiceImpl implements RegisterService{
 			//shop price
 			BigDecimal shopprice=BigDecimal.valueOf(shop.getShopamount()).divide(shop.getShopsquare());
 			shop.setShopprice(shopprice);
+			//shop type
+			
 			//data insert		
 			shopsDao.insertShop(shop);				
 		}
