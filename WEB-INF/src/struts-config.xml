@@ -11,7 +11,22 @@
         </action>
         <!-- Add actions here -->
         <action name="Upload" class="com.westtextile.action.FileUpload">
+<<<<<<< HEAD
         	<param name="savePath">/upload</param>
+=======
+        	
+            <interceptor-ref name="fileUpload">  
+               <param name="allowedTypes">
+				      image/bmp,image/png,image/gif,image/jpeg,image/jpg,
+				      image/pjpeg ,image/bmp, image/gif, image/x-png, text/plain, 
+				      application/vnd.ms-excel,				      
+				</param>
+				<param name="maximumSize">3242880</param>
+				
+            </interceptor-ref>     
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <param name="savePath">/upload</param>       	
+>>>>>>> c6244a0e8b1e23439d2a483b9f0eb84fe3200774
         	<result name="input">/WEB-INF/jsp/registration.jsp</result>
             <result>/WEB-INF/jsp/registration.jsp</result>
         </action>            
